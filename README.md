@@ -52,7 +52,7 @@ CoreData helps to show cached information.
 ![Alt text](assets/UseCase.png?raw=true "Use Case")
 
 <details>
-  <summary>plantuml</summary>
+  <summary>use case in plant uml</summary>
   
 ```plantuml
 @startuml
@@ -103,7 +103,7 @@ In SwiftUI we are going to use a natural way, there's no need of MVVM here, we j
 <img width="391" alt="image" src="https://github.com/southfox/SwiftUIGitHubClient/assets/1378903/f54de7de-e1aa-495a-a022-07120a82628b">
 
 <details>
-  <summary>plantuml</summary>
+  <summary>Mind map of the model in plantuml</summary>
   
 ```plantuml
 @startmindmap
@@ -112,3 +112,66 @@ In SwiftUI we are going to use a natural way, there's no need of MVVM here, we j
 ** Repository Extended Detail
 @endmindmap
 ```
+</details>
+
+## Sequence
+
+Sequence diagram of the app.
+
+![image](https://github.com/southfox/SwiftUIGitHubClient/assets/1378903/205b0cf6-76f8-4511-b0d9-9b123b88af1a)
+
+<details>
+  <summary>Sequence in plantuml</summary>
+  
+```plantuml
+@startuml
+actor User
+box "iOS Application" #LightBlue
+participant VM
+participant Settings
+participant CoreData
+end box
+participant GitHub
+
+== initialization ==
+VM -> Settings: isDarkMode
+Settings -> CoreData: settings
+CoreData --> Settings: settings
+Settings --> VM: darkMode on/off
+
+VM -> Settings: isCache
+Settings -> CoreData: settings
+CoreData --> Settings: settings
+Settings --> VM: cache on/off
+
+VM -> Settings: isExpanded
+Settings -> CoreData: settings
+CoreData --> Settings: settings
+Settings --> VM: isExpanded on/off
+
+== case error ==
+User -> VM : refresh
+VM ->x GitHub : request: getRepos
+VM --> User: loading
+VM --> User: error
+VM --> Settings: isCacheEnabled
+Settings -> CoreData: getCache
+CoreData --> Settings: cache on/off
+Settings --> VM: cache on/off
+== with cache ==
+Settings --> VM: cache = on
+VM -> CoreData: getReposFromDB
+CoreData --> VM: Repos
+VM --> User: Repos
+== with no cache ==
+Settings --> VM: cache = off
+VM -> User: retry/cancel?
+== case success ==
+User -> VM : refresh
+VM -> GitHub : request: getRepos
+VM --> User: loading
+GitHub --> VM : response: getRepos
+VM --> User: response
+@enduml
+```
+</details>
