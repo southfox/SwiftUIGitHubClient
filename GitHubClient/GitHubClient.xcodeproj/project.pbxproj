@@ -48,6 +48,7 @@
 		98CD4C612BD36F3400AEB6EB /* GitHubClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubClientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98CD4C652BD36F3400AEB6EB /* GitHubClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClientUITests.swift; sourceTree = "<group>"; };
 		98CD4C672BD36F3400AEB6EB /* GitHubClientUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClientUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		98CD4C742BD3705800AEB6EB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 		98CD4C392BD36F3200AEB6EB = {
 			isa = PBXGroup;
 			children = (
+				98CD4C742BD3705800AEB6EB /* README.md */,
 				98CD4C442BD36F3200AEB6EB /* GitHubClient */,
 				98CD4C5A2BD36F3400AEB6EB /* GitHubClientTests */,
 				98CD4C642BD36F3400AEB6EB /* GitHubClientUITests */,
