@@ -9,16 +9,18 @@ Swift / SwiftUI
 iOS16 minimum
 Core Data
 Animations: Lottie (on error) & Shimmer (loading)
-Settings: use cache / show animation
+Settings: use cache / dark mode / expanded mode
 
 ## The app
 It fetchs the trending repositories from the provided public API and display it to the users, it uses cache, but the user could refresh the information.
 CoreData helps to show cached information.
 
+### Use Case
+![Alt text](assets/UseCase.png?raw=true "Use Case")
+
 <details>
-  <summary>Use Cases</summary>
+  <summary>plantuml</summary>
   
-  ### plantuml
 ```plantuml
 @startuml
 left to right direction
@@ -34,8 +36,9 @@ package Application {
   component Cache
   component Animation
   component Settings
-  usecase "Dark Mode" as DM
-  usecase "Expanded Mode" as EM
+  usecase "Dark Mode On/Off" as isDarkMode
+  usecase "Expanded Mode On/Off" as isExpandedMode
+  usecase "Use Cache On/Off" as isCacheMode
 }
 package GitHub {
   usecase "Repositories" as Rep
@@ -50,8 +53,9 @@ UC2 --> Rep
 UC2 --> Cache
 Rep --> DB
 Cache --> CD
-Settings --> DM
-Settings --> EM
+Settings --> isDarkMode
+Settings --> isExpandedMode
+Settings --> isCacheMode
 @enduml
 ```
 
