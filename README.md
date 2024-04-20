@@ -49,7 +49,7 @@ It fetchs the trending repositories from the provided public API and display it 
 CoreData helps to show cached information.
 
 ### Use Case
-![Alt text](assets/UseCase.png?raw=true "Use Case")
+![image](https://github.com/southfox/SwiftUIGitHubClient/assets/1378903/7c455ffe-c788-4f42-8116-d36df6ccc301)
 
 <details>
   <summary>use case in plant uml</summary>
@@ -70,7 +70,6 @@ package Application {
   component Animation
   component Settings
   usecase "Dark Mode On/Off" as isDarkMode
-  usecase "Expanded Mode On/Off" as isExpandedMode
   usecase "Use Cache On/Off" as isCacheMode
 }
 package GitHub {
@@ -87,7 +86,6 @@ UC2 --> Cache
 Rep --> DB
 Cache --> CD
 Settings --> isDarkMode
-Settings --> isExpandedMode
 Settings --> isCacheMode
 @enduml
 ```
@@ -118,7 +116,7 @@ In SwiftUI we are going to use a natural way, there's no need of MVVM here, we j
 
 Sequence diagram of the app.
 
-![image](https://github.com/southfox/SwiftUIGitHubClient/assets/1378903/205b0cf6-76f8-4511-b0d9-9b123b88af1a)
+![image](https://github.com/southfox/SwiftUIGitHubClient/assets/1378903/73ef8bd8-cd18-4b1f-8907-e8b634678bae)
 
 <details>
   <summary>Sequence in plantuml</summary>
@@ -144,11 +142,6 @@ Settings -> CoreData: settings
 CoreData --> Settings: settings
 Settings --> VM: cache on/off
 
-VM -> Settings: isExpanded
-Settings -> CoreData: settings
-CoreData --> Settings: settings
-Settings --> VM: isExpanded on/off
-
 == case error ==
 User -> VM : refresh
 VM ->x GitHub : request: getRepos
@@ -172,6 +165,18 @@ VM -> GitHub : request: getRepos
 VM --> User: loading
 GitHub --> VM : response: getRepos
 VM --> User: response
+== tap on a cell ==
+User -> VM : tap
+VM -> User: expand cell
+== tap on settings ==
+User -> VM : tap
+VM -> Settings: go to settings view
+Settings -> CoreData: get settings
+CoreData -> Settings: settings
+Settings -> VM: settings
+VM -> User: settings view
+== settings view ==
+
 @enduml
 ```
 </details>
