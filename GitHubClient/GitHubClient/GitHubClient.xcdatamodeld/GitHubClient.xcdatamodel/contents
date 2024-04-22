@@ -7,5 +7,9 @@
         <attribute name="language" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="stars" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RepositoryResponse" inverseName="repositories" inverseEntity="RepositoryResponse"/>
+    </entity>
+    <entity name="RepositoryResponse" representedClassName=".RepositoryResponse" syncable="YES" codeGenerationType="category">
+        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Repository" inverseName="response" inverseEntity="Repository"/>
     </entity>
 </model>

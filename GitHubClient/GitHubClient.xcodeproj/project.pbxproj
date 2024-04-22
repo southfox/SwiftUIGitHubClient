@@ -19,8 +19,10 @@
 		98CD4C772BD40C9800AEB6EB /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C762BD40C9800AEB6EB /* String+.swift */; };
 		98CD4C7F2BD4117800AEB6EB /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C7E2BD4117800AEB6EB /* GitHubError.swift */; };
 		98CD4C822BD414F300AEB6EB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C812BD414F300AEB6EB /* Repository.swift */; };
-		98CD4C852BD6865200AEB6EB /* GitHubResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C842BD6865200AEB6EB /* GitHubResponse.json */; };
+		98CD4C852BD6865200AEB6EB /* GitHubRepositoryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C842BD6865200AEB6EB /* GitHubRepositoryResponse.json */; };
 		98CD4C872BD68E7900AEB6EB /* Repository.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C862BD68E7900AEB6EB /* Repository.json */; };
+		98CD4C892BD6A21B00AEB6EB /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C882BD6A21B00AEB6EB /* Owner.swift */; };
+		98CD4C8B2BD6A2D700AEB6EB /* RepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C8A2BD6A2D700AEB6EB /* RepositoryResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +59,10 @@
 		98CD4C762BD40C9800AEB6EB /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		98CD4C7E2BD4117800AEB6EB /* GitHubError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubError.swift; sourceTree = "<group>"; };
 		98CD4C812BD414F300AEB6EB /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
-		98CD4C842BD6865200AEB6EB /* GitHubResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GitHubResponse.json; sourceTree = "<group>"; };
+		98CD4C842BD6865200AEB6EB /* GitHubRepositoryResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GitHubRepositoryResponse.json; sourceTree = "<group>"; };
 		98CD4C862BD68E7900AEB6EB /* Repository.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Repository.json; sourceTree = "<group>"; };
+		98CD4C882BD6A21B00AEB6EB /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
+		98CD4C8A2BD6A2D700AEB6EB /* RepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				98CD4C812BD414F300AEB6EB /* Repository.swift */,
+				98CD4C8A2BD6A2D700AEB6EB /* RepositoryResponse.swift */,
+				98CD4C882BD6A21B00AEB6EB /* Owner.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,7 +166,7 @@
 		98CD4C832BD6865200AEB6EB /* json */ = {
 			isa = PBXGroup;
 			children = (
-				98CD4C842BD6865200AEB6EB /* GitHubResponse.json */,
+				98CD4C842BD6865200AEB6EB /* GitHubRepositoryResponse.json */,
 				98CD4C862BD68E7900AEB6EB /* Repository.json */,
 			);
 			path = json;
@@ -279,7 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98CD4C852BD6865200AEB6EB /* GitHubResponse.json in Resources */,
+				98CD4C852BD6865200AEB6EB /* GitHubRepositoryResponse.json in Resources */,
 				98CD4C872BD68E7900AEB6EB /* Repository.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +306,8 @@
 			files = (
 				98CD4C4F2BD36F3400AEB6EB /* PersistenceController.swift in Sources */,
 				98CD4C482BD36F3200AEB6EB /* ContentView.swift in Sources */,
+				98CD4C8B2BD6A2D700AEB6EB /* RepositoryResponse.swift in Sources */,
+				98CD4C892BD6A21B00AEB6EB /* Owner.swift in Sources */,
 				98CD4C462BD36F3200AEB6EB /* GitHubClientApp.swift in Sources */,
 				98CD4C522BD36F3400AEB6EB /* GitHubClient.xcdatamodeld in Sources */,
 				98CD4C7F2BD4117800AEB6EB /* GitHubError.swift in Sources */,
