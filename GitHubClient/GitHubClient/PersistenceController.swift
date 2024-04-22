@@ -17,26 +17,20 @@ struct PersistenceController {
 
     /// Preview persistence for Swift UI Preview, in memory only
     static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        for i in 0..<10 {
-            let repository = Repository(context: viewContext)
-            repository.brief = "The #\(i) programming language"
-            repository.fullName = "some/#\(i)"
-            repository.icon = i % 2 == 0 ? "https://avatars.githubusercontent.com/u/4314092?v=4" : "https://avatars.githubusercontent.com/u/1507452?v=4"
-            repository.language = "L#\(i)"
-            repository.name = "l#\(i)"
-            repository.stars = Int32(arc4random() % 1000)
+        var persistence = PersistenceController(inMemory: true)
+        let viewContext = persistence.container.viewContext
+        
+        guard let jsonData = "GitHubRepositoryResponse".data else {
+            fatalError("Unresolved error invalidDecode")
         }
         do {
-            try viewContext.save()
+            // No need to treat the response, will be in coredata anyway
+            _ = try persistence.jsonDecoder.decode(RepositoryResponse.self, from: jsonData)
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        return result
+        return persistence
     }()
     
     /// Special json decoder for CoreData entities

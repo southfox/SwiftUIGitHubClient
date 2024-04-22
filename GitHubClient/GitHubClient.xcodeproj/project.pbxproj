@@ -16,13 +16,14 @@
 		98CD4C5C2BD36F3400AEB6EB /* GitHubClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C5B2BD36F3400AEB6EB /* GitHubClientTests.swift */; };
 		98CD4C662BD36F3400AEB6EB /* GitHubClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C652BD36F3400AEB6EB /* GitHubClientUITests.swift */; };
 		98CD4C682BD36F3400AEB6EB /* GitHubClientUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C672BD36F3400AEB6EB /* GitHubClientUITestsLaunchTests.swift */; };
-		98CD4C772BD40C9800AEB6EB /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C762BD40C9800AEB6EB /* String+.swift */; };
 		98CD4C7F2BD4117800AEB6EB /* GitHubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C7E2BD4117800AEB6EB /* GitHubError.swift */; };
 		98CD4C822BD414F300AEB6EB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C812BD414F300AEB6EB /* Repository.swift */; };
 		98CD4C852BD6865200AEB6EB /* GitHubRepositoryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C842BD6865200AEB6EB /* GitHubRepositoryResponse.json */; };
 		98CD4C872BD68E7900AEB6EB /* Repository.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C862BD68E7900AEB6EB /* Repository.json */; };
 		98CD4C892BD6A21B00AEB6EB /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C882BD6A21B00AEB6EB /* Owner.swift */; };
 		98CD4C8B2BD6A2D700AEB6EB /* RepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C8A2BD6A2D700AEB6EB /* RepositoryResponse.swift */; };
+		98CD4C8C2BD6ABAA00AEB6EB /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C762BD40C9800AEB6EB /* String+.swift */; };
+		98CD4C8D2BD6AC7800AEB6EB /* GitHubRepositoryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C842BD6865200AEB6EB /* GitHubRepositoryResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 				98CD4C452BD36F3200AEB6EB /* GitHubClientApp.swift */,
 				98CD4C7E2BD4117800AEB6EB /* GitHubError.swift */,
 				98CD4C472BD36F3200AEB6EB /* ContentView.swift */,
+				98CD4C762BD40C9800AEB6EB /* String+.swift */,
 				98CD4C492BD36F3400AEB6EB /* Assets.xcassets */,
 				98CD4C4E2BD36F3400AEB6EB /* PersistenceController.swift */,
 				98CD4C502BD36F3400AEB6EB /* GitHubClient.xcdatamodeld */,
@@ -139,7 +141,6 @@
 			children = (
 				98CD4C832BD6865200AEB6EB /* json */,
 				98CD4C5B2BD36F3400AEB6EB /* GitHubClientTests.swift */,
-				98CD4C762BD40C9800AEB6EB /* String+.swift */,
 			);
 			path = GitHubClientTests;
 			sourceTree = "<group>";
@@ -276,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98CD4C8D2BD6AC7800AEB6EB /* GitHubRepositoryResponse.json in Resources */,
 				98CD4C4D2BD36F3400AEB6EB /* Preview Assets.xcassets in Resources */,
 				98CD4C4A2BD36F3400AEB6EB /* Assets.xcassets in Resources */,
 			);
@@ -305,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98CD4C4F2BD36F3400AEB6EB /* PersistenceController.swift in Sources */,
+				98CD4C8C2BD6ABAA00AEB6EB /* String+.swift in Sources */,
 				98CD4C482BD36F3200AEB6EB /* ContentView.swift in Sources */,
 				98CD4C8B2BD6A2D700AEB6EB /* RepositoryResponse.swift in Sources */,
 				98CD4C892BD6A21B00AEB6EB /* Owner.swift in Sources */,
@@ -319,7 +322,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98CD4C772BD40C9800AEB6EB /* String+.swift in Sources */,
 				98CD4C5C2BD36F3400AEB6EB /* GitHubClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
