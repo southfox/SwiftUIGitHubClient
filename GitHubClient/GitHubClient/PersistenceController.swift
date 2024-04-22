@@ -1,5 +1,5 @@
 //
-//  Persistence.swift
+//  PersistenceController.swift
 //  GitHubClient
 //
 //  Created by fox on 20/04/2024.
@@ -9,13 +9,24 @@ import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
+    
+    /// Test persistence in memory only
+    static var test: PersistenceController {
+        PersistenceController(inMemory: true)
+    }
 
+    /// Preview persistence for Swift UI Preview, in memory only
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for i in 0..<10 {
+            let repository = Repository(context: viewContext)
+            repository.brief = "The #\(i) programming language"
+            repository.fullName = "some/#\(i)"
+            repository.icon = i % 2 == 0 ? "https://avatars.githubusercontent.com/u/4314092?v=4" : "https://avatars.githubusercontent.com/u/1507452?v=4"
+            repository.language = "L#\(i)"
+            repository.name = "l#\(i)"
+            repository.stars = Int32(arc4random() % 1000)
         }
         do {
             try viewContext.save()
@@ -27,8 +38,14 @@ struct PersistenceController {
         }
         return result
     }()
+    
+    /// Special json decoder for CoreData entities
+    public lazy var jsonDecoder: JSONDecoder = {
+        JSONDecoder()
+    }()
 
     let container: NSPersistentContainer
+    static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
 
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "GitHubClient")
@@ -52,5 +69,8 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        if jsonDecoder.userInfo[Self.managedObjectContext] == nil {
+            jsonDecoder.userInfo[Self.managedObjectContext] = container.viewContext
+        }
     }
 }
