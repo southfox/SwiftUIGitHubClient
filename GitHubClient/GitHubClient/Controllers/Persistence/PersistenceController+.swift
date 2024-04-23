@@ -8,12 +8,12 @@
 import Foundation
 
 extension PersistenceController {
-    func clean() throws {
-        try cleanRepositoryResponse()
-        try cleanRepositories()
+    func clean(isCacheEnabled: Bool) throws {
+        try cleanRepositoryResponse(isCacheEnabled: isCacheEnabled)
+        try cleanRepositories(isCacheEnabled: isCacheEnabled)
     }
     
-    private func cleanRepositories() throws {
+    private func cleanRepositories(isCacheEnabled: Bool) throws {
         let viewContext = container.viewContext
         let fetchRequest = Repository.fetchRequest()
         
@@ -21,10 +21,12 @@ extension PersistenceController {
         try viewContext.fetch(fetchRequest).forEach { object in
             viewContext.delete(object)
         }
-        try viewContext.save()
+        if isCacheEnabled == false {
+            try viewContext.save()
+        }
     }
     
-    private func cleanRepositoryResponse() throws {
+    private func cleanRepositoryResponse(isCacheEnabled: Bool) throws {
         let viewContext = container.viewContext
         let fetchRequest = RepositoryResponse.fetchRequest()
         
@@ -32,22 +34,30 @@ extension PersistenceController {
         try viewContext.fetch(fetchRequest).forEach { object in
             viewContext.delete(object)
         }
-        try viewContext.save()
+        if isCacheEnabled == false {
+            try viewContext.save()
+        }
+    }
+    
+    func rollBack() {
+        let viewContext = container.viewContext
+        viewContext.rollback()
     }
     
     func isRepositoriesCacheEmpty() throws -> Bool {
         try container.viewContext.fetch(RepositoryResponse.fetchRequest()).isEmpty
     }
     
-    func placeholder() throws{
+    func placeholder() throws {
         let viewContext = container.viewContext
-        for i in 0..<10 {
+        /// Loading state enum from Shimmer framework, it's used for redacted views.
+        (0..<10).forEach {
             let repository = Repository(context: viewContext)
-            repository.brief = "The #\(i) programming language"
-            repository.fullName = "some/#\(i)"
-            repository.icon = i % 2 == 0 ? "https://avatars.githubusercontent.com/u/4314092?v=4" : "https://avatars.githubusercontent.com/u/1507452?v=4"
-            repository.language = "L#\(i)"
-            repository.name = "l#\(i)"
+            repository.brief = "The #\($0) programming language"
+            repository.fullName = "some/#\($0)"
+            repository.icon = $0 % 2 == 0 ? "https://avatars.githubusercontent.com/u/4314092?v=4" : "https://avatars.githubusercontent.com/u/1507452?v=4"
+            repository.language = "L#\($0)"
+            repository.name = "l#\($0)"
             repository.stars = Int32(arc4random() % 1000)
         }
         try viewContext.save()

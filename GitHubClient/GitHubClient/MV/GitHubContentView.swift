@@ -38,6 +38,10 @@ struct GitHubContentView: View {
         ErrorAnimationView(retryAction: {
             refreshListAction()
         }, cancelAction: {
+            if isCacheEnabled {
+                PersistenceController.shared.rollBack()
+                isLoading = false
+            }
             isError.toggle()
         })
     }
@@ -74,7 +78,6 @@ struct GitHubContentView: View {
                             .shimmering(active: isLoading)
                         }
                     }
-
                 }
             }
             .refreshable {
@@ -104,14 +107,14 @@ struct GitHubContentView: View {
 
     private func refreshListAction() {
         queue.sync {
-            self.isError = false
-            self.isLoading = true
+            isError = false
+            isLoading = true
             Task {
                 do {
-                    try await NetworkController.requestRepositories(isPreview: isPreview)
-                    self.isLoading = false
+                    try await NetworkController.requestRepositories(isPreview: isPreview, isCacheEnabled: isCacheEnabled)
+                    isLoading = false
                 } catch {
-                    self.isError = true
+                    isError = true
                 }
             }
         }
