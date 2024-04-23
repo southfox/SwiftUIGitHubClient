@@ -10,6 +10,6 @@
         <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RepositoryResponse" inverseName="repositories" inverseEntity="RepositoryResponse"/>
     </entity>
     <entity name="RepositoryResponse" representedClassName=".RepositoryResponse" syncable="YES" codeGenerationType="category">
-        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Repository" inverseName="response" inverseEntity="Repository"/>
+        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Repository" inverseName="response" inverseEntity="Repository"/>
     </entity>
 </model>

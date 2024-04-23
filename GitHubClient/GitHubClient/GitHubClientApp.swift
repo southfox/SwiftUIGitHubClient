@@ -13,7 +13,7 @@ struct GitHubClientApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(itemIdExpanded: "")
+            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

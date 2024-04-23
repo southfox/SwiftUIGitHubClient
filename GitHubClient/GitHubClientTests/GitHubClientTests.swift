@@ -66,7 +66,7 @@ final class GitHubClientTests: XCTestCase {
             format: "name LIKE %@", "go"
         )
         
-        // if this is Go?
+        // if this is Go repository?
         let repository = try persistence.container.viewContext.fetch(repositoryFetchRequest).first
         
         // Should probe this

@@ -17,17 +17,23 @@ struct ContentView: View {
         animation: .default)
     
     private var items: FetchedResults<Repository>
-    
+    private let queue = DispatchQueue(label: "GitHubClientApp.ContentView.sync")
+
     @State private var showSettingsAlert = false
     @State private var isCacheEnabled = false
     @State private var isDarkModeEnbled = false
     @State private var isExpanded: Bool = false
     @State var itemIdExpanded: String = ""
+    @State var isPreview: Bool = false
     @State var isLoading: Bool = false
 
     var body: some View {
         content
             .preferredColorScheme(isDarkModeEnbled ? .dark : .light)
+            .onAppear {
+                isLoading = true
+                refreshListAction()
+            }
     }
     
     private var content: some View {
@@ -85,18 +91,25 @@ struct ContentView: View {
     }
 
     private func refreshListAction() {
-        withAnimation {
-            /// TODO: do the api call
-            Repository.reload()
+        queue.sync {
+            self.isLoading = true
+            Task {
+                do {
+                    try await NetworkController.requestRepositories(isPreview: isPreview)
+                    self.isLoading = false
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }
 
 #Preview {
     struct BindingContentView : View {
-        @State private var value = ""
         var body: some View {
-            ContentView(itemIdExpanded: value).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            ContentView(isPreview: true, isLoading: false)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
     return BindingContentView()

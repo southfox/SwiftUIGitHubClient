@@ -8,7 +8,7 @@
 import CoreData
 
 struct PersistenceController {
-    static let shared = PersistenceController()
+    static var shared = PersistenceController()
     
     /// Test persistence in memory only
     static var test: PersistenceController {
@@ -68,3 +68,4 @@ struct PersistenceController {
         }
     }
 }
+

@@ -26,6 +26,8 @@
 		98CD4C8D2BD6AC7800AEB6EB /* GitHubRepositoryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C842BD6865200AEB6EB /* GitHubRepositoryResponse.json */; };
 		98CD4C932BD77FB900AEB6EB /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C922BD77FB900AEB6EB /* CellView.swift */; };
 		98CD4C962BD787BC00AEB6EB /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 98CD4C952BD787BC00AEB6EB /* Shimmer */; };
+		98CD4C982BD78A2500AEB6EB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C972BD78A2500AEB6EB /* NetworkController.swift */; };
+		98CD4C9C2BD7E40100AEB6EB /* PersistenceController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		98CD4C882BD6A21B00AEB6EB /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		98CD4C8A2BD6A2D700AEB6EB /* RepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryResponse.swift; sourceTree = "<group>"; };
 		98CD4C922BD77FB900AEB6EB /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		98CD4C972BD78A2500AEB6EB /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceController+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,8 @@
 				98CD4C762BD40C9800AEB6EB /* String+.swift */,
 				98CD4C492BD36F3400AEB6EB /* Assets.xcassets */,
 				98CD4C4E2BD36F3400AEB6EB /* PersistenceController.swift */,
+				98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */,
+				98CD4C972BD78A2500AEB6EB /* NetworkController.swift */,
 				98CD4C502BD36F3400AEB6EB /* GitHubClient.xcdatamodeld */,
 				98CD4C4B2BD36F3400AEB6EB /* Preview Content */,
 			);
@@ -317,6 +323,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98CD4C982BD78A2500AEB6EB /* NetworkController.swift in Sources */,
+				98CD4C9C2BD7E40100AEB6EB /* PersistenceController+.swift in Sources */,
 				98CD4C4F2BD36F3400AEB6EB /* PersistenceController.swift in Sources */,
 				98CD4C8C2BD6ABAA00AEB6EB /* String+.swift in Sources */,
 				98CD4C482BD36F3200AEB6EB /* ContentView.swift in Sources */,
