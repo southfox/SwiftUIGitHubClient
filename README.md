@@ -49,7 +49,7 @@ It fetchs the trending repositories from the provided public API and display it 
 CoreData helps to show cached information.
 
 ### Use Case
-![image](https://github.com/southfox/SwiftUIGitHubClient/assets/1378903/7c455ffe-c788-4f42-8116-d36df6ccc301)
+![Use Case](assets/UseCase.png)
 
 <details>
   <summary>use case in plant uml</summary>
@@ -69,7 +69,6 @@ package Application {
   component Cache
   component Animation
   component Settings
-  usecase "Dark Mode On/Off" as isDarkMode
   usecase "Use Cache On/Off" as isCacheMode
 }
 package GitHub {
@@ -85,7 +84,6 @@ UC2 --> Rep
 UC2 --> Cache
 Rep --> DB
 Cache --> CD
-Settings --> isDarkMode
 Settings --> isCacheMode
 @enduml
 ```
@@ -98,7 +96,9 @@ In SwiftUI we are going to use a natural way, there's no need of MVVM here, we j
 * Adopting the ObservableObject protocol for model class (Repository).
 * Use ObservableObject where we need to manager the life cycle of the data.
 * Typically the ObservableObject is part of the model.
-<img width="391" alt="image" src="https://github.com/southfox/SwiftUIGitHubClient/assets/1378903/f54de7de-e1aa-495a-a022-07120a82628b">
+
+![Mind Map](assets/MindMap.png)
+
 
 <details>
   <summary>Mind map of the model in plantuml</summary>
@@ -116,7 +116,7 @@ In SwiftUI we are going to use a natural way, there's no need of MVVM here, we j
 
 Sequence diagram of the app.
 
-![image](https://github.com/southfox/SwiftUIGitHubClient/assets/1378903/73ef8bd8-cd18-4b1f-8907-e8b634678bae)
+![Sequence Diagram](assets/SequenceDiagram.png)
 
 <details>
   <summary>Sequence in plantuml</summary>
@@ -132,11 +132,6 @@ end box
 participant GitHub
 
 == initialization ==
-VM -> Settings: isDarkMode
-Settings -> CoreData: settings
-CoreData --> Settings: settings
-Settings --> VM: darkMode on/off
-
 VM -> Settings: isCache
 Settings -> CoreData: settings
 CoreData --> Settings: settings
@@ -180,3 +175,32 @@ VM -> User: settings view
 @enduml
 ```
 </details>
+
+## Screenshots
+
+### MVP loading
+![MVP Loading](assets/AppLoading.png)
+
+### MVP network success
+![MVP Running Success](assets/MVPRunningSuccess.png)
+
+### MVP cell expanded
+![Cell Expanded](assets/CellExpanded.png)
+
+### MVP network failed
+![Network Failure](assets/NetworkFailure.png)
+
+### MVP Settings
+![App Settings Cache](assets/AppSettingsCache.png)
+
+## Tests
+
+![Tests](assets/Tests.png)
+
+### Unit Tests
+
+#### Coverage
+
+#### Coverage
+
+![Unit Test Coverage](assets/UnitTestCoverage.png)
