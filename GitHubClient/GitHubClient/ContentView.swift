@@ -10,13 +10,20 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stars, ascending: false)],
         animation: .default)
     private var items: FetchedResults<Repository>
+    @State private var showSettingsAlert = false
+    @State private var isCacheEnabled = false
+    @State private var isDarkModeEnbled = false
 
     var body: some View {
+        content
+            .preferredColorScheme(isDarkModeEnbled ? .dark : .light)
+    }
+    
+    private var content: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
@@ -27,33 +34,38 @@ struct ContentView: View {
                     }
                 }
             }
+            .refreshable {
+                refreshListAction()
+            }
+            .navigationBarTitle(Text("Trending"))
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: refreshList) {
-                        Label("Add Item", systemImage: "plus")
+                    Button(action: {
+                        showSettingsAlert = true
+                    }) {
+                        Label("", systemImage: "gearshape")
                     }
                 }
             }
-            Text("Select an item")
+            .alert("Settings", isPresented: $showSettingsAlert) {
+                Button("Cache is \(isCacheEnabled ? "ON" : "OFF")") {
+                    isCacheEnabled = !isCacheEnabled
+                }
+                Button("Dark Mode is \(isDarkModeEnbled ? "ON" : "OFF")") {
+                    isDarkModeEnbled = !isDarkModeEnbled
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("Please change settings.")
+            }
         }
     }
 
-    private func refreshList() {
+    private func refreshListAction() {
         withAnimation {
-            //            let newItem = Repository(context: viewContext)
-            //            newItem.timestamp = Date()
-            //
-            //            do {
-            //                try viewContext.save()
-            //            } catch {
-            //                // Replace this implementation with code to handle the error appropriately.
-            //                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //                let nsError = error as NSError
-            //                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            // }
+            /// TODO: do the api call
+            Repository.reload()
         }
     }
 }
