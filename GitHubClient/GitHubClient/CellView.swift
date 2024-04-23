@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct CellView: View {
     var title: String
     var subTitle: String
@@ -32,7 +31,7 @@ struct CellView: View {
 }
 
 
-struct CellTextView: View {
+private struct CellTextView: View {
     
     var title: String
     var subTitle: String
@@ -50,7 +49,7 @@ struct CellTextView: View {
 }
 
 
-struct CellDetailView: View {
+private struct CellDetailView: View {
     var detail: String
     var language: String
     var stars: String
@@ -65,6 +64,7 @@ struct CellDetailView: View {
                     Label("", systemImage: "circle.fill")
                         .foregroundColor(.blue)
                         .font(.system(size: 8))
+                        .padding(.top, -4)
                     Text(language)
                         .foregroundColor(.primary)
                         .font(.subheadline)
@@ -75,6 +75,7 @@ struct CellDetailView: View {
                     Label("", systemImage: "star.fill")
                         .foregroundColor(.yellow)
                         .font(.system(size: 8))
+                        .padding(.top, -4)
                     Text(stars)
                         .foregroundColor(.primary)
                         .font(.subheadline)
@@ -85,7 +86,7 @@ struct CellDetailView: View {
     }
 }
 
-struct CellImageView: View {
+private struct CellImageView: View {
 
     var urlString: String
 
@@ -110,6 +111,8 @@ struct CellImageView: View {
             }
         }
         .frame(width: size, height: size)
+        .background(Color.gray.opacity(0.5))
+        .clipShape(Circle())
     }
 }
 
@@ -121,7 +124,6 @@ struct CellImageView: View {
            CellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
        }
     }
-
     return BindingCellViewNotExpanded()
 }
 
@@ -129,11 +131,10 @@ struct CellImageView: View {
 #Preview {
     struct BindingCellViewExpanded : View {
         @State private var value = "go"
-
-       var body: some View {
-           CellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
-       }
+        
+        var body: some View {
+            CellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
+        }
     }
-
     return BindingCellViewExpanded()
 }

@@ -25,6 +25,7 @@
 		98CD4C8C2BD6ABAA00AEB6EB /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C762BD40C9800AEB6EB /* String+.swift */; };
 		98CD4C8D2BD6AC7800AEB6EB /* GitHubRepositoryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C842BD6865200AEB6EB /* GitHubRepositoryResponse.json */; };
 		98CD4C932BD77FB900AEB6EB /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C922BD77FB900AEB6EB /* CellView.swift */; };
+		98CD4C962BD787BC00AEB6EB /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 98CD4C952BD787BC00AEB6EB /* Shimmer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98CD4C962BD787BC00AEB6EB /* Shimmer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +194,9 @@
 			dependencies = (
 			);
 			name = GitHubClient;
+			packageProductDependencies = (
+				98CD4C952BD787BC00AEB6EB /* Shimmer */,
+			);
 			productName = GitHubClient;
 			productReference = 98CD4C422BD36F3200AEB6EB /* GitHubClient.app */;
 			productType = "com.apple.product-type.application";
@@ -264,6 +269,9 @@
 				Base,
 			);
 			mainGroup = 98CD4C392BD36F3200AEB6EB;
+			packageReferences = (
+				98CD4C942BD787BC00AEB6EB /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+			);
 			productRefGroup = 98CD4C432BD36F3200AEB6EB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -650,6 +658,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		98CD4C942BD787BC00AEB6EB /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		98CD4C952BD787BC00AEB6EB /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98CD4C942BD787BC00AEB6EB /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		98CD4C502BD36F3400AEB6EB /* GitHubClient.xcdatamodeld */ = {

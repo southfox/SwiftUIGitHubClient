@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import Shimmer
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -21,7 +22,8 @@ struct ContentView: View {
     @State private var isCacheEnabled = false
     @State private var isDarkModeEnbled = false
     @State private var isExpanded: Bool = false
-    @State var itemIdExpanded: String
+    @State var itemIdExpanded: String = ""
+    @State var isLoading: Bool = false
 
     var body: some View {
         content
@@ -47,6 +49,8 @@ struct ContentView: View {
                                      language: item.language ?? "",
                                      stars: "\(item.stars)",
                                      itemIdExpanded: $itemIdExpanded)
+                            .redacted(reason: isLoading ? .placeholder : .privacy)
+                            .shimmering(active: isLoading)
                         }
                     }
 
@@ -75,7 +79,7 @@ struct ContentView: View {
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("Please change settings.")
+                Text("Here you can change the following settings:")
             }
         }
     }
