@@ -24,6 +24,7 @@
 		98CD4C8B2BD6A2D700AEB6EB /* RepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C8A2BD6A2D700AEB6EB /* RepositoryResponse.swift */; };
 		98CD4C8C2BD6ABAA00AEB6EB /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C762BD40C9800AEB6EB /* String+.swift */; };
 		98CD4C8D2BD6AC7800AEB6EB /* GitHubRepositoryResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C842BD6865200AEB6EB /* GitHubRepositoryResponse.json */; };
+		98CD4C932BD77FB900AEB6EB /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C922BD77FB900AEB6EB /* CellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		98CD4C862BD68E7900AEB6EB /* Repository.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Repository.json; sourceTree = "<group>"; };
 		98CD4C882BD6A21B00AEB6EB /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		98CD4C8A2BD6A2D700AEB6EB /* RepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryResponse.swift; sourceTree = "<group>"; };
+		98CD4C922BD77FB900AEB6EB /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				98CD4C452BD36F3200AEB6EB /* GitHubClientApp.swift */,
 				98CD4C7E2BD4117800AEB6EB /* GitHubError.swift */,
 				98CD4C472BD36F3200AEB6EB /* ContentView.swift */,
+				98CD4C922BD77FB900AEB6EB /* CellView.swift */,
 				98CD4C762BD40C9800AEB6EB /* String+.swift */,
 				98CD4C492BD36F3400AEB6EB /* Assets.xcassets */,
 				98CD4C4E2BD36F3400AEB6EB /* PersistenceController.swift */,
@@ -312,6 +315,7 @@
 				98CD4C8B2BD6A2D700AEB6EB /* RepositoryResponse.swift in Sources */,
 				98CD4C892BD6A21B00AEB6EB /* Owner.swift in Sources */,
 				98CD4C462BD36F3200AEB6EB /* GitHubClientApp.swift in Sources */,
+				98CD4C932BD77FB900AEB6EB /* CellView.swift in Sources */,
 				98CD4C522BD36F3400AEB6EB /* GitHubClient.xcdatamodeld in Sources */,
 				98CD4C7F2BD4117800AEB6EB /* GitHubError.swift in Sources */,
 				98CD4C822BD414F300AEB6EB /* Repository.swift in Sources */,

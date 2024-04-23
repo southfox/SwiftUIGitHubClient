@@ -10,13 +10,18 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stars, ascending: false)],
         animation: .default)
+    
     private var items: FetchedResults<Repository>
+    
     @State private var showSettingsAlert = false
     @State private var isCacheEnabled = false
     @State private var isDarkModeEnbled = false
+    @State private var isExpanded: Bool = false
+    @State var itemIdExpanded: String
 
     var body: some View {
         content
@@ -27,11 +32,24 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(items) { item in
-                    NavigationLink {
-                        Text("Repository at \(item.name!)")
+                    Button {
+                        if itemIdExpanded == item.name {
+                            itemIdExpanded = ""
+                        } else {
+                            itemIdExpanded = item.name ?? ""
+                        }
                     } label: {
-                        Text(item.name!)
+                        VStack(spacing: 10) {
+                            CellView(title: item.name ?? "",
+                                     subTitle: item.fullName ?? "",
+                                     urlString: item.icon!,
+                                     detail: item.brief ?? "",
+                                     language: item.language ?? "",
+                                     stars: "\(item.stars)",
+                                     itemIdExpanded: $itemIdExpanded)
+                        }
                     }
+
                 }
             }
             .refreshable {
@@ -71,5 +89,11 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    struct BindingContentView : View {
+        @State private var value = ""
+        var body: some View {
+            ContentView(itemIdExpanded: value).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }
+    }
+    return BindingContentView()
 }
