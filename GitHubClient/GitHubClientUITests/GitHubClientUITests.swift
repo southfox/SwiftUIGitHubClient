@@ -22,20 +22,20 @@ final class GitHubClientUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testTapOnGoCellInsideCollectionView() throws {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        
+        let collectionViewsQuery = XCUIApplication().collectionViews
+        let cells = collectionViewsQuery.cells
+        XCTAssertEqual(cells.count, 10)
+        let goButton = collectionViewsQuery.cells/*@START_MENU_TOKEN@*/.buttons["go, golang/go"]/*[[".cells.buttons[\"go, golang\/go\"]",".buttons[\"go, golang\/go\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        XCTAssertTrue(goButton.exists)
+        goButton.tap()
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        // Checks if you've have expanded the cell and you can see the brief description = "The Go programming language"
+        let appGoCellWithLabelText = app.staticTexts["The Go programming language"]
+        XCTAssertTrue(appGoCellWithLabelText.waitForExistence(timeout: 5))
     }
 }

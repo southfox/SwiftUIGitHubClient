@@ -8,12 +8,13 @@
 import CoreData
 
 struct PersistenceController {
-    static var shared = PersistenceController()
-    
+    static var shared = ProcessInfo.isRunningUnitTests ? test : db
+
+    /// Test persistence using a sqlite file
+    static var db = PersistenceController()
+
     /// Test persistence in memory only
-    static var test: PersistenceController {
-        PersistenceController(inMemory: true)
-    }
+    static var test = PersistenceController(inMemory: true)
 
     /// Preview persistence for Swift UI Preview, in memory only
     static var preview: PersistenceController = {

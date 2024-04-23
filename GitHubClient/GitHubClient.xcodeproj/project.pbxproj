@@ -28,6 +28,7 @@
 		98CD4C962BD787BC00AEB6EB /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 98CD4C952BD787BC00AEB6EB /* Shimmer */; };
 		98CD4C982BD78A2500AEB6EB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C972BD78A2500AEB6EB /* NetworkController.swift */; };
 		98CD4C9C2BD7E40100AEB6EB /* PersistenceController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */; };
+		98CD4C9E2BD7EA9B00AEB6EB /* ProcessInfo+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C9D2BD7EA9B00AEB6EB /* ProcessInfo+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		98CD4C922BD77FB900AEB6EB /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		98CD4C972BD78A2500AEB6EB /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceController+.swift"; sourceTree = "<group>"; };
+		98CD4C9D2BD7EA9B00AEB6EB /* ProcessInfo+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				98CD4C472BD36F3200AEB6EB /* ContentView.swift */,
 				98CD4C922BD77FB900AEB6EB /* CellView.swift */,
 				98CD4C762BD40C9800AEB6EB /* String+.swift */,
+				98CD4C9D2BD7EA9B00AEB6EB /* ProcessInfo+.swift */,
 				98CD4C492BD36F3400AEB6EB /* Assets.xcassets */,
 				98CD4C4E2BD36F3400AEB6EB /* PersistenceController.swift */,
 				98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */,
@@ -330,6 +333,7 @@
 				98CD4C482BD36F3200AEB6EB /* ContentView.swift in Sources */,
 				98CD4C8B2BD6A2D700AEB6EB /* RepositoryResponse.swift in Sources */,
 				98CD4C892BD6A21B00AEB6EB /* Owner.swift in Sources */,
+				98CD4C9E2BD7EA9B00AEB6EB /* ProcessInfo+.swift in Sources */,
 				98CD4C462BD36F3200AEB6EB /* GitHubClientApp.swift in Sources */,
 				98CD4C932BD77FB900AEB6EB /* CellView.swift in Sources */,
 				98CD4C522BD36F3400AEB6EB /* GitHubClient.xcdatamodeld in Sources */,

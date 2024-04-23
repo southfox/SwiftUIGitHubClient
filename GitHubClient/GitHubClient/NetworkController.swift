@@ -16,6 +16,10 @@ class NetworkController {
             // ON preview, just clean and recreate placeholders
             return
         }
+        guard ProcessInfo.isRunningUnitTests == false else {
+            // On Unit Tests
+            return
+        }
         if try PersistenceController.shared.isRepositoriesCacheEmpty() {
             try PersistenceController.shared.placeholder()
         }
@@ -25,3 +29,5 @@ class NetworkController {
         _ = try PersistenceController.shared.jsonDecoder.decode(RepositoryResponse.self, from: data)
     }
 }
+
+
