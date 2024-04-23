@@ -32,7 +32,6 @@ struct CellView: View {
 
 
 private struct CellTextView: View {
-    
     var title: String
     var subTitle: String
     

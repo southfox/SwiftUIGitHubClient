@@ -58,7 +58,6 @@ extension View {
     }
 }
 
-
 #Preview {
     VStack {
         Spacer()

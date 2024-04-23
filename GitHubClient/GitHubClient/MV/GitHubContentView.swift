@@ -10,7 +10,10 @@ import CoreData
 import Shimmer
 
 struct GitHubContentView: View {
+    @State var isError: Bool = false
+    @State var isLoading: Bool = false
     @State var isPreview: Bool = false
+
     @Environment(\.managedObjectContext) private var viewContext
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @FetchRequest(
@@ -20,12 +23,27 @@ struct GitHubContentView: View {
     private let queue = DispatchQueue(label: "GitHubClientApp.GitHubContentView.sync")
     @State private var itemIdExpanded: String = ""
     @State private var isCacheEnabled = true
-    @State private var isExpanded: Bool = false
-    @State private var isLoading: Bool = false
     @State private var showSettingsAlert = false
 
     var body: some View {
-        content
+        ZStack {
+            content
+            if isError {
+                errorView
+            }
+        }
+    }
+    
+    private var errorView: some View {
+        ErrorAnimationView(retryAction: {
+            refreshListAction()
+        }, cancelAction: {
+            isError.toggle()
+        })
+    }
+    
+    private var content: some View {
+        navigation
             .preferredColorScheme(colorScheme)
             .onAppear {
                 isLoading = true
@@ -33,7 +51,7 @@ struct GitHubContentView: View {
             }
     }
     
-    private var content: some View {
+    private var navigation: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
@@ -86,23 +104,44 @@ struct GitHubContentView: View {
 
     private func refreshListAction() {
         queue.sync {
+            self.isError = false
             self.isLoading = true
             Task {
                 do {
                     try await NetworkController.requestRepositories(isPreview: isPreview)
                     self.isLoading = false
                 } catch {
-                    print(error.localizedDescription)
+                    self.isError = true
                 }
             }
         }
     }
 }
 
-#Preview {
+#Preview("Success") {
     struct BindingGitHubContentView : View {
         var body: some View {
             GitHubContentView(isPreview: true)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }
+    }
+    return BindingGitHubContentView()
+}
+
+#Preview("Loading") {
+    struct BindingGitHubContentView : View {
+        var body: some View {
+            GitHubContentView(isLoading: true, isPreview: true)
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }
+    }
+    return BindingGitHubContentView()
+}
+
+#Preview("Fail") {
+    struct BindingGitHubContentView : View {
+        var body: some View {
+            GitHubContentView(isError: true, isPreview: true)
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
