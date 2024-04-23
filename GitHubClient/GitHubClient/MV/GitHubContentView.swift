@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  GitHubContentView.swift
 //  GitHubClient
 //
 //  Created by fox on 20/04/2024.
@@ -9,23 +9,20 @@ import SwiftUI
 import CoreData
 import Shimmer
 
-struct ContentView: View {
+struct GitHubContentView: View {
+    @State var isPreview: Bool = false
     @Environment(\.managedObjectContext) private var viewContext
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stars, ascending: false)],
         animation: .default)
-    
     private var items: FetchedResults<Repository>
-    private let queue = DispatchQueue(label: "GitHubClientApp.ContentView.sync")
-
-    @State private var showSettingsAlert = false
+    private let queue = DispatchQueue(label: "GitHubClientApp.GitHubContentView.sync")
+    @State private var itemIdExpanded: String = ""
     @State private var isCacheEnabled = true
     @State private var isExpanded: Bool = false
-    @State var itemIdExpanded: String = ""
-    @State var isPreview: Bool = false
-    @State var isLoading: Bool = false
+    @State private var isLoading: Bool = false
+    @State private var showSettingsAlert = false
 
     var body: some View {
         content
@@ -103,11 +100,11 @@ struct ContentView: View {
 }
 
 #Preview {
-    struct BindingContentView : View {
+    struct BindingGitHubContentView : View {
         var body: some View {
-            ContentView(isPreview: true, isLoading: false)
+            GitHubContentView(isPreview: true)
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
-    return BindingContentView()
+    return BindingGitHubContentView()
 }

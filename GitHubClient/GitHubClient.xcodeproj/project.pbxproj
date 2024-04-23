@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		98CD4C462BD36F3200AEB6EB /* GitHubClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C452BD36F3200AEB6EB /* GitHubClientApp.swift */; };
-		98CD4C482BD36F3200AEB6EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C472BD36F3200AEB6EB /* ContentView.swift */; };
+		98CD4C482BD36F3200AEB6EB /* GitHubContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C472BD36F3200AEB6EB /* GitHubContentView.swift */; };
 		98CD4C4A2BD36F3400AEB6EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C492BD36F3400AEB6EB /* Assets.xcassets */; };
 		98CD4C4D2BD36F3400AEB6EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C4C2BD36F3400AEB6EB /* Preview Assets.xcassets */; };
 		98CD4C4F2BD36F3400AEB6EB /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C4E2BD36F3400AEB6EB /* PersistenceController.swift */; };
@@ -29,6 +29,10 @@
 		98CD4C982BD78A2500AEB6EB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C972BD78A2500AEB6EB /* NetworkController.swift */; };
 		98CD4C9C2BD7E40100AEB6EB /* PersistenceController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */; };
 		98CD4C9E2BD7EA9B00AEB6EB /* ProcessInfo+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C9D2BD7EA9B00AEB6EB /* ProcessInfo+.swift */; };
+		98CD4CA12BD7F14200AEB6EB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 98CD4CA02BD7F14200AEB6EB /* Lottie */; };
+		98CD4CA32BD8017B00AEB6EB /* ErrorAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4CA22BD8017B00AEB6EB /* ErrorAnimationView.swift */; };
+		98CD4CA52BD801AE00AEB6EB /* Animation - 1713576514887.json in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4CA42BD801AE00AEB6EB /* Animation - 1713576514887.json */; };
+		98CD4CAE2BD80F2100AEB6EB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4CAD2BD80F2100AEB6EB /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +55,7 @@
 /* Begin PBXFileReference section */
 		98CD4C422BD36F3200AEB6EB /* GitHubClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98CD4C452BD36F3200AEB6EB /* GitHubClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClientApp.swift; sourceTree = "<group>"; };
-		98CD4C472BD36F3200AEB6EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		98CD4C472BD36F3200AEB6EB /* GitHubContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubContentView.swift; sourceTree = "<group>"; };
 		98CD4C492BD36F3400AEB6EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98CD4C4C2BD36F3400AEB6EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		98CD4C4E2BD36F3400AEB6EB /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
@@ -73,6 +77,9 @@
 		98CD4C972BD78A2500AEB6EB /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceController+.swift"; sourceTree = "<group>"; };
 		98CD4C9D2BD7EA9B00AEB6EB /* ProcessInfo+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+.swift"; sourceTree = "<group>"; };
+		98CD4CA22BD8017B00AEB6EB /* ErrorAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAnimationView.swift; sourceTree = "<group>"; };
+		98CD4CA42BD801AE00AEB6EB /* Animation - 1713576514887.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Animation - 1713576514887.json"; sourceTree = "<group>"; };
+		98CD4CAD2BD80F2100AEB6EB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98CD4C962BD787BC00AEB6EB /* Shimmer in Frameworks */,
+				98CD4CA12BD7F14200AEB6EB /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,18 +133,13 @@
 		98CD4C442BD36F3200AEB6EB /* GitHubClient */ = {
 			isa = PBXGroup;
 			children = (
-				98CD4C802BD414E700AEB6EB /* Model */,
-				98CD4C452BD36F3200AEB6EB /* GitHubClientApp.swift */,
-				98CD4C7E2BD4117800AEB6EB /* GitHubError.swift */,
-				98CD4C472BD36F3200AEB6EB /* ContentView.swift */,
-				98CD4C922BD77FB900AEB6EB /* CellView.swift */,
-				98CD4C762BD40C9800AEB6EB /* String+.swift */,
-				98CD4C9D2BD7EA9B00AEB6EB /* ProcessInfo+.swift */,
+				98CD4CAB2BD8022D00AEB6EB /* App */,
 				98CD4C492BD36F3400AEB6EB /* Assets.xcassets */,
-				98CD4C4E2BD36F3400AEB6EB /* PersistenceController.swift */,
-				98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */,
-				98CD4C972BD78A2500AEB6EB /* NetworkController.swift */,
-				98CD4C502BD36F3400AEB6EB /* GitHubClient.xcdatamodeld */,
+				98CD4CAA2BD8021C00AEB6EB /* Controllers */,
+				98CD4CA72BD801C700AEB6EB /* Extensions */,
+				98CD4C7E2BD4117800AEB6EB /* GitHubError.swift */,
+				98CD4C802BD414E700AEB6EB /* Model */,
+				98CD4CAC2BD8023A00AEB6EB /* MV */,
 				98CD4C4B2BD36F3400AEB6EB /* Preview Content */,
 			);
 			path = GitHubClient;
@@ -187,6 +190,62 @@
 			path = json;
 			sourceTree = "<group>";
 		};
+		98CD4CA72BD801C700AEB6EB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				98CD4C762BD40C9800AEB6EB /* String+.swift */,
+				98CD4C9D2BD7EA9B00AEB6EB /* ProcessInfo+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		98CD4CA82BD801FF00AEB6EB /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				98CD4C4E2BD36F3400AEB6EB /* PersistenceController.swift */,
+				98CD4C9B2BD7E40100AEB6EB /* PersistenceController+.swift */,
+				98CD4C502BD36F3400AEB6EB /* GitHubClient.xcdatamodeld */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		98CD4CA92BD8020C00AEB6EB /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				98CD4CA22BD8017B00AEB6EB /* ErrorAnimationView.swift */,
+				98CD4CA42BD801AE00AEB6EB /* Animation - 1713576514887.json */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		98CD4CAA2BD8021C00AEB6EB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				98CD4CA82BD801FF00AEB6EB /* Persistence */,
+				98CD4C972BD78A2500AEB6EB /* NetworkController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		98CD4CAB2BD8022D00AEB6EB /* App */ = {
+			isa = PBXGroup;
+			children = (
+				98CD4C452BD36F3200AEB6EB /* GitHubClientApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		98CD4CAC2BD8023A00AEB6EB /* MV */ = {
+			isa = PBXGroup;
+			children = (
+				98CD4CA92BD8020C00AEB6EB /* Animation */,
+				98CD4C472BD36F3200AEB6EB /* GitHubContentView.swift */,
+				98CD4C922BD77FB900AEB6EB /* CellView.swift */,
+				98CD4CAD2BD80F2100AEB6EB /* CustomButton.swift */,
+			);
+			path = MV;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -205,6 +264,7 @@
 			name = GitHubClient;
 			packageProductDependencies = (
 				98CD4C952BD787BC00AEB6EB /* Shimmer */,
+				98CD4CA02BD7F14200AEB6EB /* Lottie */,
 			);
 			productName = GitHubClient;
 			productReference = 98CD4C422BD36F3200AEB6EB /* GitHubClient.app */;
@@ -280,6 +340,7 @@
 			mainGroup = 98CD4C392BD36F3200AEB6EB;
 			packageReferences = (
 				98CD4C942BD787BC00AEB6EB /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				98CD4C9F2BD7F14100AEB6EB /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 98CD4C432BD36F3200AEB6EB /* Products */;
 			projectDirPath = "";
@@ -299,6 +360,7 @@
 			files = (
 				98CD4C8D2BD6AC7800AEB6EB /* GitHubRepositoryResponse.json in Resources */,
 				98CD4C4D2BD36F3400AEB6EB /* Preview Assets.xcassets in Resources */,
+				98CD4CA52BD801AE00AEB6EB /* Animation - 1713576514887.json in Resources */,
 				98CD4C4A2BD36F3400AEB6EB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,7 +392,8 @@
 				98CD4C9C2BD7E40100AEB6EB /* PersistenceController+.swift in Sources */,
 				98CD4C4F2BD36F3400AEB6EB /* PersistenceController.swift in Sources */,
 				98CD4C8C2BD6ABAA00AEB6EB /* String+.swift in Sources */,
-				98CD4C482BD36F3200AEB6EB /* ContentView.swift in Sources */,
+				98CD4C482BD36F3200AEB6EB /* GitHubContentView.swift in Sources */,
+				98CD4CA32BD8017B00AEB6EB /* ErrorAnimationView.swift in Sources */,
 				98CD4C8B2BD6A2D700AEB6EB /* RepositoryResponse.swift in Sources */,
 				98CD4C892BD6A21B00AEB6EB /* Owner.swift in Sources */,
 				98CD4C9E2BD7EA9B00AEB6EB /* ProcessInfo+.swift in Sources */,
@@ -339,6 +402,7 @@
 				98CD4C522BD36F3400AEB6EB /* GitHubClient.xcdatamodeld in Sources */,
 				98CD4C7F2BD4117800AEB6EB /* GitHubError.swift in Sources */,
 				98CD4C822BD414F300AEB6EB /* Repository.swift in Sources */,
+				98CD4CAE2BD80F2100AEB6EB /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,6 +744,14 @@
 				minimumVersion = 1.4.2;
 			};
 		};
+		98CD4C9F2BD7F14100AEB6EB /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -687,6 +759,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 98CD4C942BD787BC00AEB6EB /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
 			productName = Shimmer;
+		};
+		98CD4CA02BD7F14200AEB6EB /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98CD4C9F2BD7F14100AEB6EB /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 
