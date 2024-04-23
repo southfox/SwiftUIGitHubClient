@@ -11,6 +11,7 @@ import Shimmer
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment (\.colorScheme) private var colorScheme: ColorScheme
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stars, ascending: false)],
@@ -20,8 +21,7 @@ struct ContentView: View {
     private let queue = DispatchQueue(label: "GitHubClientApp.ContentView.sync")
 
     @State private var showSettingsAlert = false
-    @State private var isCacheEnabled = false
-    @State private var isDarkModeEnbled = false
+    @State private var isCacheEnabled = true
     @State private var isExpanded: Bool = false
     @State var itemIdExpanded: String = ""
     @State var isPreview: Bool = false
@@ -29,7 +29,7 @@ struct ContentView: View {
 
     var body: some View {
         content
-            .preferredColorScheme(isDarkModeEnbled ? .dark : .light)
+            .preferredColorScheme(colorScheme)
             .onAppear {
                 isLoading = true
                 refreshListAction()
@@ -79,9 +79,6 @@ struct ContentView: View {
             .alert("Settings", isPresented: $showSettingsAlert) {
                 Button("Cache is \(isCacheEnabled ? "ON" : "OFF")") {
                     isCacheEnabled = !isCacheEnabled
-                }
-                Button("Dark Mode is \(isDarkModeEnbled ? "ON" : "OFF")") {
-                    isDarkModeEnbled = !isDarkModeEnbled
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
