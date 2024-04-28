@@ -29,10 +29,12 @@ struct GitHubContentView: View {
         ZStack {
             content
             if isError {
+                RepositoriesPlaceholderView()
                 errorView
             }
         }
         .task {
+            guard isPreview == false else { return }
             isLoading = true
             try? await refreshListAction()
         }
@@ -58,33 +60,23 @@ struct GitHubContentView: View {
                 configureCache()
             }
     }
-    
-    private var useCache: Bool {
-        isCacheEnabled && items.isEmpty
-    }
-    
-    private func configureCache() {
-        guard isCacheEnabled else {
-            URLSession.shared.configuration.requestCachePolicy = .useProtocolCachePolicy
-            URLCache.shared.memoryCapacity = 512_000
-            URLCache.shared.diskCapacity = 10_000_000
-            return
-        }
-        URLSession.shared.configuration.requestCachePolicy = .returnCacheDataElseLoad
-        URLCache.shared.memoryCapacity = 10_000_000 // ~10 MB memory space
-        URLCache.shared.diskCapacity = 1_000_000_000 // ~1GB disk cache space
-    }
         
     private var navigation: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    RepositoryButtonView(isLoading: isLoading, item: item)
-                }
-            }
-            .refreshable {
-                Task {
-                    try? await refreshListAction()
+            ZStack {
+                if isLoading {
+                    RepositoriesPlaceholderView()
+                } else {
+                    List {
+                        ForEach(items) { item in
+                            RepositoryButtonView(isLoading: isLoading, item: item)
+                        }
+                    }
+                    .refreshable {
+                        Task {
+                            try? await refreshListAction()
+                        }
+                    }
                 }
             }
             .navigationBarTitle(Text("Trending"))
@@ -119,6 +111,22 @@ struct GitHubContentView: View {
         } catch {
             isError = true
         }
+    }
+    
+    private var useCache: Bool {
+        isCacheEnabled && items.isEmpty
+    }
+    
+    private func configureCache() {
+        guard isCacheEnabled else {
+            URLSession.shared.configuration.requestCachePolicy = .useProtocolCachePolicy
+            URLCache.shared.memoryCapacity = 512_000
+            URLCache.shared.diskCapacity = 10_000_000
+            return
+        }
+        URLSession.shared.configuration.requestCachePolicy = .returnCacheDataElseLoad
+        URLCache.shared.memoryCapacity = 10_000_000 // ~10 MB memory space
+        URLCache.shared.diskCapacity = 1_000_000_000 // ~1GB disk cache space
     }
 }
 

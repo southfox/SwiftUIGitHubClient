@@ -21,7 +21,7 @@ final class GitHubClientTests: XCTestCase {
     
 
     func testRepositoryEntity() throws {
-        var persistence = PersistenceController.cache
+        var persistence = PersistenceController.memory
         
         guard let jsonData = "Repository".data else {
             throw GitHubError.invalidDecode
@@ -32,7 +32,7 @@ final class GitHubClientTests: XCTestCase {
     }
     
     func testRepositoryResponse() throws {
-        var persistence = PersistenceController.cache
+        var persistence = PersistenceController.memory
         
         guard let jsonData = "GitHubRepositoryResponse".data else {
             throw GitHubError.invalidDecode

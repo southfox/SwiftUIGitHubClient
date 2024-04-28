@@ -38,6 +38,7 @@ struct RepositoryButtonView: View {
 #Preview {
     List {
         RepositoryButtonView(item: Repository.placeholder.first!)
+        RepositoryButtonView(isLoading: true, item: Repository.placeholder.first!)
         RepositoryButtonView(item: Repository.placeholder.last!)
     }
 }

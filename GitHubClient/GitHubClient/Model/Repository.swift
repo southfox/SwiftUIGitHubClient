@@ -34,7 +34,7 @@ public class Repository: NSManagedObject, Decodable {
     }
     
     convenience init(placeholderIndex index: Int) {
-        let context = PersistenceController.db.container.viewContext
+        let context = PersistenceController.shared.container.viewContext
         self.init(context: context)
         brief = "The #\(index) programming language"
         fullName = "some/#\(index)"
@@ -59,5 +59,4 @@ extension Repository {
         /// Loading state enum from Shimmer framework, it's used for redacted views.
         NSOrderedSet(array: placeholder)
     }
-
 }
