@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		983B699C2BDE55BC0039A216 /* Data+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B699B2BDE55BC0039A216 /* Data+.swift */; };
+		983B699E2BDE60500039A216 /* RepositoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983B699D2BDE60500039A216 /* RepositoryView.swift */; };
 		98CD4C462BD36F3200AEB6EB /* GitHubClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C452BD36F3200AEB6EB /* GitHubClientApp.swift */; };
 		98CD4C482BD36F3200AEB6EB /* GitHubContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CD4C472BD36F3200AEB6EB /* GitHubContentView.swift */; };
 		98CD4C4A2BD36F3400AEB6EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98CD4C492BD36F3400AEB6EB /* Assets.xcassets */; };
@@ -53,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		983B699B2BDE55BC0039A216 /* Data+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+.swift"; sourceTree = "<group>"; };
+		983B699D2BDE60500039A216 /* RepositoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryView.swift; sourceTree = "<group>"; };
+		983B699F2BDE695E0039A216 /* GitHubClient.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHubClient.2.xcdatamodel; sourceTree = "<group>"; };
 		98CD4C422BD36F3200AEB6EB /* GitHubClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98CD4C452BD36F3200AEB6EB /* GitHubClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubClientApp.swift; sourceTree = "<group>"; };
 		98CD4C472BD36F3200AEB6EB /* GitHubContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubContentView.swift; sourceTree = "<group>"; };
@@ -194,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				98CD4C762BD40C9800AEB6EB /* String+.swift */,
+				983B699B2BDE55BC0039A216 /* Data+.swift */,
 				98CD4C9D2BD7EA9B00AEB6EB /* ProcessInfo+.swift */,
 			);
 			path = Extensions;
@@ -240,6 +246,7 @@
 			children = (
 				98CD4CA92BD8020C00AEB6EB /* Animation */,
 				98CD4C472BD36F3200AEB6EB /* GitHubContentView.swift */,
+				983B699D2BDE60500039A216 /* RepositoryView.swift */,
 				98CD4C922BD77FB900AEB6EB /* CellView.swift */,
 				98CD4CAD2BD80F2100AEB6EB /* CustomButton.swift */,
 			);
@@ -399,6 +406,8 @@
 				98CD4C9E2BD7EA9B00AEB6EB /* ProcessInfo+.swift in Sources */,
 				98CD4C462BD36F3200AEB6EB /* GitHubClientApp.swift in Sources */,
 				98CD4C932BD77FB900AEB6EB /* CellView.swift in Sources */,
+				983B699C2BDE55BC0039A216 /* Data+.swift in Sources */,
+				983B699E2BDE60500039A216 /* RepositoryView.swift in Sources */,
 				98CD4C522BD36F3400AEB6EB /* GitHubClient.xcdatamodeld in Sources */,
 				98CD4C7F2BD4117800AEB6EB /* GitHubError.swift in Sources */,
 				98CD4C822BD414F300AEB6EB /* Repository.swift in Sources */,
@@ -771,9 +780,10 @@
 		98CD4C502BD36F3400AEB6EB /* GitHubClient.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				983B699F2BDE695E0039A216 /* GitHubClient.2.xcdatamodel */,
 				98CD4C512BD36F3400AEB6EB /* GitHubClient.xcdatamodel */,
 			);
-			currentVersion = 98CD4C512BD36F3400AEB6EB /* GitHubClient.xcdatamodel */;
+			currentVersion = 983B699F2BDE695E0039A216 /* GitHubClient.2.xcdatamodel */;
 			path = GitHubClient.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

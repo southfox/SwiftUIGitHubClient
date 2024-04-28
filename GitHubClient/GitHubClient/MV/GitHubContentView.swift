@@ -18,10 +18,13 @@ struct GitHubContentView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stars, ascending: false)],
-        animation: .default)
-    private var items: FetchedResults<Repository>
-    private let queue = DispatchQueue(label: "GitHubClientApp.GitHubContentView.sync")
-    @State private var itemIdExpanded: String = ""
+        animation: .default
+    ) private var items: FetchedResults<Repository>
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stars, ascending: false)],
+        animation: .default
+    ) private var itemsInCache: FetchedResults<Repository2>
     @State private var isCacheEnabled = true
     @State private var showSettingsAlert = false
 
@@ -32,15 +35,21 @@ struct GitHubContentView: View {
                 errorView
             }
         }
+        .task {
+            isLoading = true
+            try? await refreshListAction()
+        }
     }
     
     private var errorView: some View {
         ErrorAnimationView(retryAction: {
-            refreshListAction()
+            Task {
+                try? await refreshListAction()
+            }
         }, cancelAction: {
             if isCacheEnabled {
-                PersistenceController.shared.rollBack()
                 isLoading = false
+                try? Repository.retrieveCache()
             }
             isError.toggle()
         })
@@ -50,38 +59,43 @@ struct GitHubContentView: View {
         navigation
             .preferredColorScheme(colorScheme)
             .onAppear {
-                isLoading = true
-                refreshListAction()
+                configureCache()
             }
     }
     
+    private var useCache: Bool {
+        isCacheEnabled && items.isEmpty
+    }
+    
+    private func configureCache() {
+        guard isCacheEnabled else {
+            URLSession.shared.configuration.requestCachePolicy = .useProtocolCachePolicy
+            URLCache.shared.memoryCapacity = 512000
+            URLCache.shared.diskCapacity = 10000000
+            return
+        }
+        URLSession.shared.configuration.requestCachePolicy = .returnCacheDataElseLoad
+        URLCache.shared.memoryCapacity = 10_000_000 // ~10 MB memory space
+        URLCache.shared.diskCapacity = 1_000_000_000 // ~1GB disk cache space
+    }
+        
     private var navigation: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
-                    Button {
-                        if itemIdExpanded == item.name {
-                            itemIdExpanded = ""
-                        } else {
-                            itemIdExpanded = item.name ?? ""
-                        }
-                    } label: {
-                        VStack(spacing: 10) {
-                            CellView(title: item.name ?? "",
-                                     subTitle: item.fullName ?? "",
-                                     urlString: item.icon!,
-                                     detail: item.brief ?? "",
-                                     language: item.language ?? "",
-                                     stars: "\(item.stars)",
-                                     itemIdExpanded: $itemIdExpanded)
-                            .redacted(reason: isLoading ? .placeholder : .privacy)
-                            .shimmering(active: isLoading)
-                        }
+                if useCache {
+                    ForEach(itemsInCache) { item in
+                        RepositoryView(isLoading: isLoading, item: item)
+                    }
+                } else {
+                    ForEach(items) { item in
+                        RepositoryView(isLoading: isLoading, item: item)
                     }
                 }
             }
             .refreshable {
-                refreshListAction()
+                Task {
+                    try? await refreshListAction()
+                }
             }
             .navigationBarTitle(Text("Trending"))
             .navigationBarTitleDisplayMode(.inline)
@@ -97,6 +111,7 @@ struct GitHubContentView: View {
             .alert("Settings", isPresented: $showSettingsAlert) {
                 Button("Cache is \(isCacheEnabled ? "ON" : "OFF")") {
                     isCacheEnabled = !isCacheEnabled
+                    configureCache()
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
@@ -104,19 +119,15 @@ struct GitHubContentView: View {
             }
         }
     }
-
-    private func refreshListAction() {
-        queue.sync {
-            isError = false
-            isLoading = true
-            Task {
-                do {
-                    try await NetworkController.requestRepositories(isPreview: isPreview, isCacheEnabled: isCacheEnabled)
-                    isLoading = false
-                } catch {
-                    isError = true
-                }
-            }
+    
+    private func refreshListAction() async throws {
+        isError = false
+        isLoading = true
+        do {
+            try await NetworkController.requestRepositories(isPreview: isPreview, isCacheEnabled: isCacheEnabled)
+            isLoading = false
+        } catch {
+            isError = true
         }
     }
 }

@@ -32,4 +32,32 @@ public class Repository: NSManagedObject, Decodable {
         name = try container.decode(type(of: name), forKey: .name)
         stars = try container.decode(type(of: stars), forKey: .stars)
     }
+    
+    convenience init(placeholderIndex index: Int) {
+        let context = PersistenceController.cache.container.viewContext
+        self.init(context: context)
+        brief = "The #\(index) programming language"
+        fullName = "some/#\(index)"
+        icon = index % 2 == 0 ? "https://avatars.githubusercontent.com/u/4314092?v=4" : "https://avatars.githubusercontent.com/u/1507452?v=4"
+        language = "L#\(index)"
+        name = "l#\(index)"
+        stars = Int32(arc4random() % 1000)
+    }
 }
+
+extension Repository {
+    static var fetcher: NSFetchRequest<Repository> {
+        Repository.fetchRequest()
+    }
+    
+    static func retrieveCache() throws {
+        _ = try PersistenceController.cache.jsonDecoder.decode(RepositoryResponse2.self, from: Data.retrieveCache())
+    }
+    
+    static var placeholder: [Repository] {
+        /// Loading state enum from Shimmer framework, it's used for redacted views.
+        (0..<10).map { Repository(placeholderIndex: $0) }
+    }
+}
+
+public class Repository2: Repository {}

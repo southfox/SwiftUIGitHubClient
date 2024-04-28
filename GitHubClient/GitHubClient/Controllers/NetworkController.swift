@@ -10,24 +10,20 @@ import CoreData
 
 class NetworkController {
     static func requestRepositories(isPreview: Bool, isCacheEnabled: Bool) async throws {
-        guard isPreview == false else {
-            try PersistenceController.shared.clean(isCacheEnabled: isCacheEnabled)
-            try PersistenceController.shared.placeholder()
-            // ON preview, just clean and recreate placeholders
+        guard isPreview == false,
+              ProcessInfo.isRunningUnitTests == false
+        else {
+            // ON preview or Unit Tests, just clean and recreate placeholders
+            try PersistenceController.shared.clean()
             return
-        }
-        guard ProcessInfo.isRunningUnitTests == false else {
-            // On Unit Tests
-            return
-        }
-        if try PersistenceController.shared.isRepositoriesCacheEmpty() {
-            try PersistenceController.shared.placeholder()
         }
         let url = URL(string: "https://api.github.com/search/repositories?q=language=+sort:stars")!
         let (data, _) = try await URLSession.shared.data(from: url)
-        try PersistenceController.shared.clean(isCacheEnabled: isCacheEnabled)
+        try PersistenceController.shared.clean()
         _ = try PersistenceController.shared.jsonDecoder.decode(RepositoryResponse.self, from: data)
+        if isCacheEnabled {
+            try data.saveCache()
+        }
+        try PersistenceController.shared.container.viewContext.save()
     }
 }
-
-

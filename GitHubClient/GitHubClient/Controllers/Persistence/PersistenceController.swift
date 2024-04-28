@@ -8,17 +8,17 @@
 import CoreData
 
 struct PersistenceController {
-    static var shared = ProcessInfo.isRunningUnitTests ? test : db
+    static var shared = ProcessInfo.isRunningUnitTests ? cache : db
 
     /// Test persistence using a sqlite file
     static var db = PersistenceController()
 
     /// Test persistence in memory only
-    static var test = PersistenceController(inMemory: true)
+    static var cache = PersistenceController(inMemory: true)
 
     /// Preview persistence for Swift UI Preview, in memory only
     static var preview: PersistenceController = {
-        var persistence = PersistenceController(inMemory: true)
+        var persistence = cache
         let viewContext = persistence.container.viewContext
         
         guard let jsonData = "GitHubRepositoryResponse".data else {

@@ -26,7 +26,6 @@ final class GitHubClientUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        
         let collectionViewsQuery = XCUIApplication().collectionViews
         let cells = collectionViewsQuery.cells
         XCTAssertEqual(cells.count, 10)

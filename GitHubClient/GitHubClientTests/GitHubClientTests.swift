@@ -21,7 +21,7 @@ final class GitHubClientTests: XCTestCase {
     
 
     func testRepositoryEntity() throws {
-        var persistence = PersistenceController.test
+        var persistence = PersistenceController.cache
         
         guard let jsonData = "Repository".data else {
             throw GitHubError.invalidDecode
@@ -32,7 +32,7 @@ final class GitHubClientTests: XCTestCase {
     }
     
     func testRepositoryResponse() throws {
-        var persistence = PersistenceController.test
+        var persistence = PersistenceController.cache
         
         guard let jsonData = "GitHubRepositoryResponse".data else {
             throw GitHubError.invalidDecode
@@ -71,6 +71,21 @@ final class GitHubClientTests: XCTestCase {
         
         // Should probe this
         test(repository: repository)
+    }
+    
+    func testCache() throws {
+        let cacheUrl = try Data.cacheUrl()
+        XCTAssertNotNil(cacheUrl)
+        XCTAssertTrue(cacheUrl.absoluteString.contains("Repository.json"))
+        
+        guard let jsonData = "GitHubRepositoryResponse".data else {
+            throw GitHubError.invalidDecode
+        }
+
+        try jsonData.saveCache()
+        let data = try Data.retrieveCache()
+        XCTAssertNotNil(data)
+        XCTAssertEqual(data, jsonData)
     }
 }
 

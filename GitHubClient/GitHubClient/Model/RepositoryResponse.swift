@@ -23,3 +23,11 @@ public class RepositoryResponse: NSManagedObject, Decodable {
         repositories = NSOrderedSet(array: try container.decode([Repository].self, forKey: .repositories))
     }
 }
+
+extension RepositoryResponse {
+    static var fetcher: NSFetchRequest<RepositoryResponse> {
+        RepositoryResponse.fetchRequest()
+    }
+}
+
+public class RepositoryResponse2: RepositoryResponse {}
