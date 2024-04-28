@@ -29,7 +29,7 @@ final class GitHubClientUITests: XCTestCase {
         let collectionViewsQuery = XCUIApplication().collectionViews
         let cells = collectionViewsQuery.cells
         XCTAssertEqual(cells.count, 10)
-        let goButton = collectionViewsQuery.cells/*@START_MENU_TOKEN@*/.buttons["go, golang/go"]/*[[".cells.buttons[\"go, golang\/go\"]",".buttons[\"go, golang\/go\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let goButton = collectionViewsQuery.cells/*@START_MENU_TOKEN@*/.cells.buttons["go, golang/go"]/*[[".cells.buttons[\"go, golang\/go\"]",".buttons[\"go, golang\/go\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
         XCTAssertTrue(goButton.waitForExistence(timeout: 5))
         XCTAssertTrue(goButton.exists)
         goButton.tap()

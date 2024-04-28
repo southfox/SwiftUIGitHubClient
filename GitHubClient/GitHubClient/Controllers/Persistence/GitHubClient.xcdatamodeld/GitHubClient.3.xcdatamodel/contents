@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B81" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Repository" representedClassName=".Repository" syncable="YES" codeGenerationType="category">
+        <attribute name="brief" optional="YES" attributeType="String"/>
+        <attribute name="fullName" optional="YES" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="language" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="stars" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RepositoryResponse" inverseName="repositories" inverseEntity="RepositoryResponse"/>
+    </entity>
+    <entity name="RepositoryResponse" representedClassName=".RepositoryResponse" syncable="YES" codeGenerationType="category">
+        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Repository" inverseName="response" inverseEntity="Repository"/>
+    </entity>
+</model>

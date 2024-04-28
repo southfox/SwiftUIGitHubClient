@@ -7,47 +7,49 @@
 
 import SwiftUI
 
-struct PrimaryButton: View {
-    var action: (()->())
-    var title: String
-    
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .padding(.horizontal, 80)
-                .foregroundStyle(.white)
+struct CustomButton {
+    struct Primary: View {
+        var action: (()->())
+        var title: String
+        
+        var body: some View {
+            Button(action: action) {
+                Text(title)
+                    .padding(.horizontal, 80)
+                    .foregroundStyle(.white)
+            }
+            .background(.clear)
+            .buttonStyle(.borderedProminent)
+            .tint(.green)
         }
-        .background(.clear)
-        .buttonStyle(.borderedProminent)
-        .tint(.green)
     }
-}
-
-struct SecondaryButton: View {
-    var action: (()->())
-    var title: String
     
-    var body: some View {
-        Button(action: action, label: {
-            Text(title)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 92)
-                .foregroundColor(.green)
-                .background(
-                    RoundedRectangle(
-                        cornerRadius: 10,
-                        style: .continuous
+    struct Secondary: View {
+        var action: (()->())
+        var title: String
+        
+        var body: some View {
+            Button(action: action, label: {
+                Text(title)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 92)
+                    .foregroundColor(.green)
+                    .background(
+                        RoundedRectangle(
+                            cornerRadius: 10,
+                            style: .continuous
+                        )
+                        .fill(.white)
                     )
-                    .fill(.white)
-                )
-                .overlay {
-                    RoundedRectangle(
-                        cornerRadius: 10,
-                        style: .continuous
-                    )
-                    .stroke(.green, lineWidth: 1)
-                }
-        })
+                    .overlay {
+                        RoundedRectangle(
+                            cornerRadius: 10,
+                            style: .continuous
+                        )
+                        .stroke(.green, lineWidth: 1)
+                    }
+            })
+        }
     }
 }
 
@@ -61,8 +63,8 @@ extension View {
 #Preview {
     VStack {
         Spacer()
-        PrimaryButton(action: {}, title: "RELOAD")
-        SecondaryButton(action: {}, title: "Quit")
+        CustomButton.Primary(action: {}, title: "RELOAD")
+        CustomButton.Secondary(action: {}, title: "Quit")
         Spacer()
     }
     .background(.gray.opacity(0.3))

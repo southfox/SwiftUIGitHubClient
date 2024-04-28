@@ -1,5 +1,5 @@
 //
-//  CellView.swift
+//  RepositoryCellView.swift
 //  GitHubClient
 //
 //  Created by fox on 23/04/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CellView: View {
+struct RepositoryCellView: View {
     var title: String
     var subTitle: String
     var urlString: String
@@ -30,7 +30,6 @@ struct CellView: View {
     }
 }
 
-
 private struct CellTextView: View {
     var title: String
     var subTitle: String
@@ -46,7 +45,6 @@ private struct CellTextView: View {
         }
     }
 }
-
 
 private struct CellDetailView: View {
     var detail: String
@@ -86,9 +84,7 @@ private struct CellDetailView: View {
 }
 
 private struct CellImageView: View {
-
     var urlString: String
-
     @Environment(\.displayScale) var scale
     private let size: CGFloat = 50
 
@@ -116,24 +112,23 @@ private struct CellImageView: View {
 }
 
 #Preview {
-    struct BindingCellViewNotExpanded : View {
+    struct BindingRepositoryCellViewNotExpanded : View {
        @State private var value = ""
 
        var body: some View {
-           CellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
+           RepositoryCellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
        }
     }
-    return BindingCellViewNotExpanded()
+    return BindingRepositoryCellViewNotExpanded()
 }
 
-
 #Preview {
-    struct BindingCellViewExpanded : View {
+    struct BindingRepositoryCellViewExpanded : View {
         @State private var value = "go"
         
         var body: some View {
-            CellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
+            RepositoryCellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
         }
     }
-    return BindingCellViewExpanded()
+    return BindingRepositoryCellViewExpanded()
 }

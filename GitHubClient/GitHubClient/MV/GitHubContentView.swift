@@ -15,16 +15,13 @@ struct GitHubContentView: View {
     @State var isPreview: Bool = false
 
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment (\.colorScheme) private var colorScheme: ColorScheme
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stars, ascending: false)],
         animation: .default
     ) private var items: FetchedResults<Repository>
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Repository.stars, ascending: false)],
-        animation: .default
-    ) private var itemsInCache: FetchedResults<Repository2>
+    let placeholder = Repository.placeholder
     @State private var isCacheEnabled = true
     @State private var showSettingsAlert = false
 
@@ -49,7 +46,6 @@ struct GitHubContentView: View {
         }, cancelAction: {
             if isCacheEnabled {
                 isLoading = false
-                try? Repository.retrieveCache()
             }
             isError.toggle()
         })
@@ -70,8 +66,8 @@ struct GitHubContentView: View {
     private func configureCache() {
         guard isCacheEnabled else {
             URLSession.shared.configuration.requestCachePolicy = .useProtocolCachePolicy
-            URLCache.shared.memoryCapacity = 512000
-            URLCache.shared.diskCapacity = 10000000
+            URLCache.shared.memoryCapacity = 512_000
+            URLCache.shared.diskCapacity = 10_000_000
             return
         }
         URLSession.shared.configuration.requestCachePolicy = .returnCacheDataElseLoad
@@ -82,14 +78,8 @@ struct GitHubContentView: View {
     private var navigation: some View {
         NavigationView {
             List {
-                if useCache {
-                    ForEach(itemsInCache) { item in
-                        RepositoryView(isLoading: isLoading, item: item)
-                    }
-                } else {
-                    ForEach(items) { item in
-                        RepositoryView(isLoading: isLoading, item: item)
-                    }
+                ForEach(items) { item in
+                    RepositoryButtonView(isLoading: isLoading, item: item)
                 }
             }
             .refreshable {
@@ -124,7 +114,7 @@ struct GitHubContentView: View {
         isError = false
         isLoading = true
         do {
-            try await NetworkController.requestRepositories(isPreview: isPreview, isCacheEnabled: isCacheEnabled)
+            try await NetworkController.requestRepositories(viewContext: viewContext, isPreview: isPreview, isCacheEnabled: isCacheEnabled)
             isLoading = false
         } catch {
             isError = true

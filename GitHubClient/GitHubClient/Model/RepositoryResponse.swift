@@ -29,5 +29,3 @@ extension RepositoryResponse {
         RepositoryResponse.fetchRequest()
     }
 }
-
-public class RepositoryResponse2: RepositoryResponse {}

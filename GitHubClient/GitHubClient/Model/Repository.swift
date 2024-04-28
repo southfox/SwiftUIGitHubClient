@@ -34,7 +34,7 @@ public class Repository: NSManagedObject, Decodable {
     }
     
     convenience init(placeholderIndex index: Int) {
-        let context = PersistenceController.cache.container.viewContext
+        let context = PersistenceController.db.container.viewContext
         self.init(context: context)
         brief = "The #\(index) programming language"
         fullName = "some/#\(index)"
@@ -49,15 +49,15 @@ extension Repository {
     static var fetcher: NSFetchRequest<Repository> {
         Repository.fetchRequest()
     }
-    
-    static func retrieveCache() throws {
-        _ = try PersistenceController.cache.jsonDecoder.decode(RepositoryResponse2.self, from: Data.retrieveCache())
-    }
-    
+        
     static var placeholder: [Repository] {
         /// Loading state enum from Shimmer framework, it's used for redacted views.
         (0..<10).map { Repository(placeholderIndex: $0) }
     }
-}
+    
+    static var placeholderOrderedSet: NSOrderedSet {
+        /// Loading state enum from Shimmer framework, it's used for redacted views.
+        NSOrderedSet(array: placeholder)
+    }
 
-public class Repository2: Repository {}
+}

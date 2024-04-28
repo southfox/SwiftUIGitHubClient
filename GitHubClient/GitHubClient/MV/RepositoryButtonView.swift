@@ -1,5 +1,5 @@
 //
-//  RepositoryView.swift
+//  RepositoryButtonView.swift
 //  GitHubClient
 //
 //  Created by fox on 28/04/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RepositoryView: View {
+struct RepositoryButtonView: View {
     @State private var itemIdExpanded: String = ""
     var isLoading: Bool = false
     var item: Repository
@@ -21,7 +21,7 @@ struct RepositoryView: View {
             }
         } label: {
             VStack(spacing: 10) {
-                CellView(title: item.name ?? "",
+                RepositoryCellView(title: item.name ?? "",
                          subTitle: item.fullName ?? "",
                          urlString: item.icon!,
                          detail: item.brief ?? "",
@@ -37,7 +37,7 @@ struct RepositoryView: View {
 
 #Preview {
     List {
-        RepositoryView(item: Repository.placeholder.first!)
-        RepositoryView(item: Repository.placeholder.last!)
+        RepositoryButtonView(item: Repository.placeholder.first!)
+        RepositoryButtonView(item: Repository.placeholder.last!)
     }
 }

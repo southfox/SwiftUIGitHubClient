@@ -24,8 +24,8 @@ struct ErrorAnimationView: View {
                 Text("An alien is blocking your signal")
                     .foregroundColor(.white)
                     .font(.subheadline)
-                PrimaryButton(action: retryAction, title: "RETRY")
-                SecondaryButton(action: cancelAction, title: "Cancel")
+                CustomButton.Primary(action: retryAction, title: "RETRY")
+                CustomButton.Secondary(action: cancelAction, title: "Cancel")
             }
         }
         .background(.black.opacity(0.8))
