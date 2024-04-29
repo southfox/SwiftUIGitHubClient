@@ -10,4 +10,5 @@ import Foundation
 enum GitHubError: Error {
     case managedObjectContextIsMissing
     case invalidDecode
+    case none
 }
