@@ -10,7 +10,7 @@ import CoreData
 import Shimmer
 
 struct GitHubContentView: View {
-    @State var isError: Bool = false
+    @State var latestError: GitHubError = .none
     @State var isLoading: Bool = false
     @State var isPreview: Bool = false
 
@@ -28,8 +28,7 @@ struct GitHubContentView: View {
     var body: some View {
         ZStack {
             content
-            if isError {
-                RepositoriesPlaceholderView()
+            if (latestError == .none) == false {
                 errorView
             }
         }
@@ -41,7 +40,8 @@ struct GitHubContentView: View {
     }
     
     private var errorView: some View {
-        ErrorAnimationView(retryAction: {
+        ErrorAnimationView(error: latestError,
+                           retryAction: {
             Task {
                 try? await refreshListAction()
             }
@@ -49,7 +49,7 @@ struct GitHubContentView: View {
             if isCacheEnabled {
                 isLoading = false
             }
-            isError.toggle()
+            latestError = .none
         })
     }
     
@@ -103,13 +103,13 @@ struct GitHubContentView: View {
     }
     
     private func refreshListAction() async throws {
-        isError = false
+        latestError = .none
         isLoading = true
         do {
             try await NetworkController.requestRepositories(viewContext: viewContext, isPreview: isPreview, isCacheEnabled: isCacheEnabled)
             isLoading = false
         } catch {
-            isError = true
+            latestError = error.githubError
         }
     }
     
@@ -153,7 +153,7 @@ struct GitHubContentView: View {
 #Preview("Fail") {
     struct BindingGitHubContentView : View {
         var body: some View {
-            GitHubContentView(isError: true, isPreview: true)
+            GitHubContentView(latestError: .unknown, isPreview: true)
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
