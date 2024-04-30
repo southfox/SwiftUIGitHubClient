@@ -13,6 +13,7 @@ struct GitHubContentView: View {
     @State var latestError: GitHubError = .none
     @State var isLoading: Bool = false
     @State var isPreview: Bool = false
+    private(set) var networkController: NetworkController
 
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
@@ -106,7 +107,7 @@ struct GitHubContentView: View {
         latestError = .none
         isLoading = true
         do {
-            try await NetworkController.requestRepositories(viewContext: viewContext, isPreview: isPreview, isCacheEnabled: isCacheEnabled)
+            try await networkController.requestRepositories(isPreview: isPreview, isCacheEnabled: isCacheEnabled)
             isLoading = false
         } catch {
             latestError = error.githubError
@@ -133,7 +134,7 @@ struct GitHubContentView: View {
 #Preview("Success") {
     struct BindingGitHubContentView : View {
         var body: some View {
-            GitHubContentView(isPreview: true)
+            GitHubContentView(isPreview: true, networkController: NetworkController(persistenceController:  PersistenceController.preview))
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
@@ -143,7 +144,7 @@ struct GitHubContentView: View {
 #Preview("Loading") {
     struct BindingGitHubContentView : View {
         var body: some View {
-            GitHubContentView(isLoading: true, isPreview: true)
+            GitHubContentView(isLoading: true, isPreview: true, networkController: NetworkController(persistenceController:  PersistenceController.preview))
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
@@ -153,7 +154,7 @@ struct GitHubContentView: View {
 #Preview("Fail") {
     struct BindingGitHubContentView : View {
         var body: some View {
-            GitHubContentView(latestError: .unknown, isPreview: true)
+            GitHubContentView(latestError: .unknown, isPreview: true, networkController: NetworkController(persistenceController:  PersistenceController.preview))
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }

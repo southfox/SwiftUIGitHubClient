@@ -13,7 +13,7 @@ struct GitHubClientApp: App {
 
     var body: some Scene {
         WindowGroup {
-            GitHubContentView()
+            GitHubContentView(networkController: NetworkController(persistenceController: persistenceController))
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

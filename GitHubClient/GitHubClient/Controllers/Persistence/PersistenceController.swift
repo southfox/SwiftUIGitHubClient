@@ -9,7 +9,6 @@ import CoreData
 import SwiftUI
 
 struct PersistenceController {
-    @Environment(\.managedObjectContext) private var viewContext
     
     static var shared = ProcessInfo.isRunningUnitTests ? memory : db
 
@@ -43,7 +42,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
     static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
 
-    init(inMemory: Bool = false) {
+    private init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "GitHubClient")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
