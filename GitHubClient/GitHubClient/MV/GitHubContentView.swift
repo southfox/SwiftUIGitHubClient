@@ -22,7 +22,10 @@ struct GitHubContentView: View {
         animation: .default
     ) private var items: FetchedResults<Repository>
     
-    let placeholder = Repository.placeholder
+    private var repositories: [RepositoryModelView] {
+        items.map({RepositoryModelView(id: UUID(), item: $0)})
+    }
+    
     @State private var isCacheEnabled = true
     @State private var showSettingsAlert = false
 
@@ -66,10 +69,10 @@ struct GitHubContentView: View {
         NavigationView {
             ZStack {
                 if isLoading {
-                    RepositoriesPlaceholderView()
+                    RepositoriesPlaceholderView(item: .placeholder)
                 } else {
                     List {
-                        ForEach(items) { item in
+                        ForEach(repositories) { item in
                             RepositoryButtonView(isLoading: isLoading, item: item)
                         }
                     }

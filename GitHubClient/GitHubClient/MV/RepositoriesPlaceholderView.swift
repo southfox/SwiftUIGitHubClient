@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct RepositoriesPlaceholderView: View {
+    let item: RepositoryModelView
+    
     var body: some View {
         List {
             ForEach (0..<10) { _ in
                 VStack(spacing: 10) {
-                    RepositoryCellView(title: "lorem ipsum",
-                                       subTitle: "lorem ipsum",
-                                       urlString: "lorem ipsum",
-                                       detail: "lorem ipsum",
-                                       language: "lorem ipsum",
-                                       stars: "333",
-                                       itemIdExpanded: .constant("lorem"))
+                    RepositoryCellView(item: item,
+                                       itemIdExpanded: .constant(UUID()))
                     .redacted(reason: .placeholder)
                     .shimmering(active: true)
                 }
@@ -28,5 +25,5 @@ struct RepositoriesPlaceholderView: View {
 }
 
 #Preview {
-    RepositoriesPlaceholderView()
+    RepositoriesPlaceholderView(item: RepositoryModelView(id: UUID(), item: Repository.placeholder.first!))
 }

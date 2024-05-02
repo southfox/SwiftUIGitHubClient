@@ -8,25 +8,20 @@
 import SwiftUI
 
 struct RepositoryButtonView: View {
-    @State private var itemIdExpanded: String = ""
+    @State private var itemIdExpanded: UUID? = nil
     var isLoading: Bool = false
-    var item: Repository
+    var item: RepositoryModelView
 
     var body: some View {
         Button {
-            if itemIdExpanded == item.name {
-                itemIdExpanded = ""
+            if itemIdExpanded == item.id {
+                itemIdExpanded = nil
             } else {
-                itemIdExpanded = item.name ?? ""
+                itemIdExpanded = item.id
             }
         } label: {
             VStack(spacing: 10) {
-                RepositoryCellView(title: item.name ?? "",
-                         subTitle: item.fullName ?? "",
-                         urlString: item.icon!,
-                         detail: item.brief ?? "",
-                         language: item.language ?? "",
-                         stars: "\(item.stars)",
+                RepositoryCellView(item: item,
                          itemIdExpanded: $itemIdExpanded)
                 .redacted(reason: isLoading ? .placeholder : .privacy)
                 .shimmering(active: isLoading)
@@ -37,8 +32,7 @@ struct RepositoryButtonView: View {
 
 #Preview {
     List {
-        RepositoryButtonView(item: Repository.placeholder.first!)
-        RepositoryButtonView(isLoading: true, item: Repository.placeholder.first!)
-        RepositoryButtonView(item: Repository.placeholder.last!)
+        RepositoryButtonView(item: .placeholder)
+        RepositoryButtonView(isLoading: true, item: .placeholder)
     }
 }

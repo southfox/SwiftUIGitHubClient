@@ -54,9 +54,4 @@ extension Repository {
         /// Loading state enum from Shimmer framework, it's used for redacted views.
         (0..<10).map { Repository(placeholderIndex: $0) }
     }
-    
-    static var placeholderOrderedSet: NSOrderedSet {
-        /// Loading state enum from Shimmer framework, it's used for redacted views.
-        NSOrderedSet(array: placeholder)
-    }
 }

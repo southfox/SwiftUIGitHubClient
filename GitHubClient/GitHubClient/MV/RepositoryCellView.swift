@@ -8,21 +8,16 @@
 import SwiftUI
 
 struct RepositoryCellView: View {
-    var title: String
-    var subTitle: String
-    var urlString: String
-    var detail: String
-    var language: String
-    var stars: String
-    @Binding var itemIdExpanded: String
+    let item: RepositoryModelView
+    @Binding var itemIdExpanded: UUID?
     
     var body: some View {
         HStack(alignment: .top) {
-            CellImageView(urlString: urlString)
+            CellImageView(urlString: item.urlString)
             VStack(alignment: .leading, spacing: 10) {
-                CellTextView(title: title, subTitle: subTitle)
-                if title == itemIdExpanded {
-                    CellDetailView(detail: detail, language: language, stars: stars)
+                CellTextView(title: item.title, subTitle: item.subTitle)
+                if item.id == itemIdExpanded {
+                    CellDetailView(detail: item.detail, language: item.language, stars: item.stars)
                         .padding(.top, 20)
                 }
             }
@@ -113,21 +108,21 @@ private struct CellImageView: View {
 
 #Preview {
     struct BindingRepositoryCellViewNotExpanded : View {
-       @State private var value = ""
-
-       var body: some View {
-           RepositoryCellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
-       }
+        @State private var value: UUID? = UUID()
+        
+        var body: some View {
+            RepositoryCellView(item: .placeholder, itemIdExpanded: $value)
+        }
     }
     return BindingRepositoryCellViewNotExpanded()
 }
 
 #Preview {
     struct BindingRepositoryCellViewExpanded : View {
-        @State private var value = "go"
+        @State private var value: UUID? = RepositoryModelView.placeholder.id
         
         var body: some View {
-            RepositoryCellView(title: "go", subTitle: "golang/go", urlString: "https://avatars.githubusercontent.com/u/4314092?v=4", detail: "The Go programming language", language: "Go", stars: "119480", itemIdExpanded: $value)
+            RepositoryCellView(item: .placeholder, itemIdExpanded: $value)
         }
     }
     return BindingRepositoryCellViewExpanded()
