@@ -110,7 +110,7 @@ struct GitHubContentView: View {
         latestError = .none
         isLoading = true
         do {
-            try await networkController.requestRepositories(isPreview: isPreview, isCacheEnabled: isCacheEnabled)
+            try await networkController.requestCoreDataRepositoryResponse(isPreview: isPreview, isCacheEnabled: isCacheEnabled)
             isLoading = false
         } catch {
             latestError = error.githubError

@@ -28,4 +28,13 @@ extension RepositoryResponse {
     static var fetcher: NSFetchRequest<RepositoryResponse> {
         RepositoryResponse.fetchRequest()
     }
+
+    static func request(persistenceController: inout PersistenceController) async throws {
+        let url = URL(string: "https://api.github.com/search/repositories?q=language=+sort:stars")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let viewContext = persistenceController.container.viewContext
+        try persistenceController.clean(viewContext)
+        _ = try persistenceController.jsonDecoder.decode(RepositoryResponse.self, from: data)
+        try viewContext.save()
+    }
 }

@@ -12,9 +12,7 @@ struct RepositoryModel: Identifiable, Codable {
     var brief: String?
     var fullName: String?
     var owner: OwnerModel?
-    var icon: String? {
-        owner?.avatar
-    }
+    var icon: String? { owner?.avatar }
     var language: String?
     var name: String?
     var stars: Int32
