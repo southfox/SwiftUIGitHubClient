@@ -54,21 +54,21 @@ struct ErrorAnimationView: View {
 
 #Preview("message") {
     ZStack {
-        RepositoriesPlaceholderView(item: RepositoryModelView.placeholder)
+        RepositoriesPlaceholderView(item: RepositoryViewModel.placeholder)
         ErrorAnimationView(error: .message(description: "Some error"), retryAction: {}, cancelAction: {})
     }
 }
 
 #Preview("fourZeroFour") {
     ZStack {
-        RepositoriesPlaceholderView(item: RepositoryModelView.placeholder)
+        RepositoriesPlaceholderView(item: RepositoryViewModel.placeholder)
         ErrorAnimationView(error: .fourZeroFour, retryAction: {}, cancelAction: {})
     }
 }
 
 #Preview("unknown") {
     ZStack {
-        RepositoriesPlaceholderView(item: RepositoryModelView.placeholder)
+        RepositoriesPlaceholderView(item: RepositoryViewModel.placeholder)
         ErrorAnimationView(error: .unknown, retryAction: {}, cancelAction: {})
     }
 }

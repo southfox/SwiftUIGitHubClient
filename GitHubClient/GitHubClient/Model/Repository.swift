@@ -50,7 +50,11 @@ extension Repository {
         Repository.fetchRequest()
     }
         
-    static var placeholder: [Repository] {
+    static var placeholder: Repository {
+        Repository(placeholderIndex: 0)
+    }
+
+    static var placeholders: [Repository] {
         /// Loading state enum from Shimmer framework, it's used for redacted views.
         (0..<10).map { Repository(placeholderIndex: $0) }
     }

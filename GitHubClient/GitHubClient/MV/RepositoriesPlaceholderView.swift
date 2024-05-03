@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RepositoriesPlaceholderView: View {
-    let item: RepositoryModelView
+    let item: RepositoryViewModel
     
     var body: some View {
         List {
@@ -25,5 +25,5 @@ struct RepositoriesPlaceholderView: View {
 }
 
 #Preview {
-    RepositoriesPlaceholderView(item: RepositoryModelView(id: UUID(), item: Repository.placeholder.first!))
+    RepositoriesPlaceholderView(item: RepositoryViewModel(id: UUID(), item: Repository.placeholder))
 }

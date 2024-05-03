@@ -10,7 +10,7 @@ import SwiftUI
 struct RepositoryButtonView: View {
     @State private var itemIdExpanded: UUID? = nil
     var isLoading: Bool = false
-    var item: RepositoryModelView
+    var item: RepositoryViewModel
 
     var body: some View {
         Button {

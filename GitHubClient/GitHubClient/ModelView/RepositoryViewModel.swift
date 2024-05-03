@@ -1,5 +1,5 @@
 //
-//  RepositoryModelView.swift
+//  RepositoryViewModel.swift
 //  GitHubClient
 //
 //  Created by fox on 02/05/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RepositoryModelView: Identifiable {
+struct RepositoryViewModel: Identifiable {
     var id: UUID
     var title: String
     var subTitle: String
@@ -25,5 +25,5 @@ struct RepositoryModelView: Identifiable {
         self.stars = "\(item.stars)"
     }
     
-    static var placeholder = RepositoryModelView(id: UUID(), item: Repository.placeholder.first!)
+    static var placeholder = RepositoryViewModel(id: UUID(), item: Repository.placeholder)
 }

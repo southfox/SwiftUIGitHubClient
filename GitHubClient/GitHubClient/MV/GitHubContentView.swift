@@ -22,8 +22,8 @@ struct GitHubContentView: View {
         animation: .default
     ) private var items: FetchedResults<Repository>
     
-    private var repositories: [RepositoryModelView] {
-        items.map({RepositoryModelView(id: UUID(), item: $0)})
+    private var repositories: [RepositoryViewModel] {
+        items.map({RepositoryViewModel(id: UUID(), item: $0)})
     }
     
     @State private var isCacheEnabled = true

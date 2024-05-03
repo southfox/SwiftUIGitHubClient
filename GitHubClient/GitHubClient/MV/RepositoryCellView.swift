@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RepositoryCellView: View {
-    let item: RepositoryModelView
+    let item: RepositoryViewModel
     @Binding var itemIdExpanded: UUID?
     
     var body: some View {
@@ -119,7 +119,7 @@ private struct CellImageView: View {
 
 #Preview {
     struct BindingRepositoryCellViewExpanded : View {
-        @State private var value: UUID? = RepositoryModelView.placeholder.id
+        @State private var value: UUID? = RepositoryViewModel.placeholder.id
         
         var body: some View {
             RepositoryCellView(item: .placeholder, itemIdExpanded: $value)
