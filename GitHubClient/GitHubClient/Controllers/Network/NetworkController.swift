@@ -32,6 +32,5 @@ class NetworkController {
         _ = try persistenceController.jsonDecoder.decode(RepositoryResponse.self, from: data)
         try viewContext.save()
     }
-
 }
 

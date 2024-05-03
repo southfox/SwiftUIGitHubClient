@@ -25,5 +25,5 @@ struct RepositoryViewModel: Identifiable {
         self.stars = "\(item.stars)"
     }
     
-    static var placeholder = RepositoryViewModel(id: UUID(), item: Repository.placeholder)
+    static var placeholder = RepositoryViewModel(id: UUID(), item: .placeholder)
 }

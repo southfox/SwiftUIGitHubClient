@@ -25,5 +25,5 @@ struct RepositoriesPlaceholderView: View {
 }
 
 #Preview {
-    RepositoriesPlaceholderView(item: RepositoryViewModel(id: UUID(), item: Repository.placeholder))
+    RepositoriesPlaceholderView(item: .placeholder)
 }
