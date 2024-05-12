@@ -27,13 +27,13 @@ class NetworkController {
     }
 
     func requestCoreDataRepositoryResponse(isPreview: Bool, isCacheEnabled: Bool) async throws {
-        let viewContext = await persistenceController.persistence.container.viewContext
+        let viewContext = persistenceController.persistence.container.viewContext
 
         guard isPreview == false,
               ProcessInfo.isRunningUnitTests == false
         else {
             // ON preview or Unit Tests, just clean and recreate placeholders
-            try await persistenceController.clean(viewContext)
+            try persistenceController.clean(viewContext)
             return
         }
         try await RepositoryResponse.request(persistenceController: &persistenceController)
