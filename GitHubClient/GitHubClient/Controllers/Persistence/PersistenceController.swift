@@ -8,32 +8,7 @@
 import CoreData
 import SwiftUI
 
-struct PersistenceController {
-    
-    static var shared = ProcessInfo.isRunningUnitTests ? memory : db
-
-    /// Test persistence using a sqlite file
-    static var db = PersistenceController()
-
-    /// Test persistence in memory only
-    static var memory = PersistenceController(inMemory: true)
-
-    /// Preview persistence for Swift UI Preview, in memory only
-    static var preview: PersistenceController = {
-        
-        guard let jsonData = "GitHubRepositoryResponse".data else {
-            fatalError("Unresolved error invalidDecode")
-        }
-        do {
-            // No need to treat the response, will be in coredata anyway
-            _ = try memory.jsonDecoder.decode(RepositoryResponse.self, from: jsonData)
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return memory
-    }()
-    
+class Persistence {
     /// Special json decoder for CoreData entities
     public lazy var jsonDecoder: JSONDecoder = {
         JSONDecoder()
@@ -41,8 +16,8 @@ struct PersistenceController {
 
     let container: NSPersistentContainer
     static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
-
-    private init(inMemory: Bool = false) {
+    
+    init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "GitHubClient")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -67,6 +42,48 @@ struct PersistenceController {
         if jsonDecoder.userInfo[Self.managedObjectContext] == nil {
             jsonDecoder.userInfo[Self.managedObjectContext] = container.viewContext
         }
+    }
+
+}
+
+struct PersistenceController {
+    
+    static var shared = ProcessInfo.isRunningUnitTests ? memory : db
+
+    /// Test persistence using a sqlite file
+    static var db = PersistenceController()
+
+    /// Test persistence in memory only
+    static var memory = PersistenceController(persistence: Persistence(inMemory: true))
+
+    /// Preview persistence for Swift UI Preview, in memory only
+    static var preview: PersistenceController = {
+        
+        guard let jsonData = "GitHubRepositoryResponse".data else {
+            fatalError("Unresolved error invalidDecode")
+        }
+        do {
+            // No need to treat the response, will be in coredata anyway
+            _ = try memory.persistence.jsonDecoder.decode(RepositoryResponse.self, from: jsonData)
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return memory
+    }()
+    
+    var persistence = Persistence()
+    
+    var container: NSPersistentContainer {
+        persistence.container
+    }
+    
+    var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
+    
+    var jsonDecoder: JSONDecoder {
+        persistence.jsonDecoder
     }
 }
 

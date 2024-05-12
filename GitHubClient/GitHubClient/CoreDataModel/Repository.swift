@@ -19,10 +19,7 @@ public class Repository: NSManagedObject, Decodable {
     }
     
     required convenience public init(from decoder: Decoder) throws {
-        guard let context = decoder.userInfo[PersistenceController.managedObjectContext] as? NSManagedObjectContext else {
-            throw GitHubError.managedObjectContextIsMissing
-        }
-        self.init(context: context)
+        self.init(context: PersistenceController.shared.viewContext)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         brief = try container.decode(type(of: brief), forKey: .brief)
         fullName = try container.decode(type(of: fullName), forKey: .fullName)
@@ -35,7 +32,9 @@ public class Repository: NSManagedObject, Decodable {
     
     convenience init(placeholderIndex index: Int) {
         let context = PersistenceController.shared.container.viewContext
-        self.init(context: context)
+        let entity = NSEntityDescription.entity(forEntityName: String(describing: type(of: self)), in: context)!
+        
+        self.init(entity: entity, insertInto: context)
         brief = "The #\(index) programming language"
         fullName = "some/#\(index)"
         icon = index % 2 == 0 ? "https://avatars.githubusercontent.com/u/4314092?v=4" : "https://avatars.githubusercontent.com/u/1507452?v=4"

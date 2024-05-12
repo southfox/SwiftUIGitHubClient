@@ -23,7 +23,7 @@ struct GitHubContentView: View {
     ) private var items: FetchedResults<Repository>
     
     private var repositories: [RepositoryViewModel] {
-        items.map({RepositoryViewModel(id: UUID(), item: $0)})
+        items.compactMap({RepositoryViewModel(id: UUID(), item: $0)})
     }
     
     @State private var isCacheEnabled = true
@@ -36,10 +36,19 @@ struct GitHubContentView: View {
                 errorView
             }
         }
-        .task {
-            guard isPreview == false else { return }
-            isLoading = true
-            try? await refreshListAction()
+        .onAppear {
+            Task {
+                do {
+                    guard isPreview == false else { return }
+                    isLoading = true
+                    try await refreshListAction()
+                } catch {
+                    if isCacheEnabled {
+                        isLoading = false
+                    }
+                    latestError = .none
+                }
+            }
         }
     }
     
@@ -47,7 +56,14 @@ struct GitHubContentView: View {
         ErrorAnimationView(error: latestError,
                            retryAction: {
             Task {
-                try? await refreshListAction()
+                do {
+                    try await refreshListAction()
+                } catch {
+                    if isCacheEnabled {
+                        isLoading = false
+                    }
+                    latestError = .none
+                }
             }
         }, cancelAction: {
             if isCacheEnabled {

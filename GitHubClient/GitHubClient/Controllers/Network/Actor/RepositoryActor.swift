@@ -29,7 +29,7 @@ extension RepositoryActor {
     func requestRepositories(persistenceController: inout PersistenceController, viewContext: NSManagedObjectContext, isPreview: Bool, isCacheEnabled: Bool) async throws {
         let url = URL(string: "https://api.github.com/search/repositories?q=language=+sort:stars")!
         let (data, _) = try await URLSession.shared.data(from: url)
-        _ = try persistenceController.jsonDecoder.decode(RepositoryResponse.self, from: data)
+        _ = try await persistenceController.jsonDecoder.decode(RepositoryResponse.self, from: data)
         try viewContext.save()
     }
 }

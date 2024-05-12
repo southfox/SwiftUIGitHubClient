@@ -5,7 +5,7 @@
 //  Created by fox on 02/05/2024.
 //
 
-import Foundation
+import SwiftUI
 
 struct RepositoryViewModel: Identifiable {
     var id: UUID
@@ -26,4 +26,8 @@ struct RepositoryViewModel: Identifiable {
     }
     
     static var placeholder = RepositoryViewModel(id: UUID(), item: .placeholder)
+}
+
+class RepositoryClassViewModel: ObservableObject {
+    @State var repositoryViewModel = RepositoryViewModel.placeholder
 }

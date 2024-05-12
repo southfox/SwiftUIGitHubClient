@@ -14,11 +14,7 @@ public class RepositoryResponse: NSManagedObject, Decodable {
     }
     
     required convenience public init(from decoder: Decoder) throws {
-        guard let context = decoder.userInfo[PersistenceController.managedObjectContext] as? NSManagedObjectContext else {
-            throw GitHubError.managedObjectContextIsMissing
-        }
-        self.init(context: context)
-        
+        self.init(context: PersistenceController.shared.viewContext)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         repositories = NSOrderedSet(array: try container.decode([Repository].self, forKey: .repositories))
     }
@@ -32,9 +28,9 @@ extension RepositoryResponse {
     static func request(persistenceController: inout PersistenceController) async throws {
         let url = URL(string: "https://api.github.com/search/repositories?q=language=+sort:stars")!
         let (data, _) = try await URLSession.shared.data(from: url)
-        let viewContext = persistenceController.container.viewContext
-        try persistenceController.clean(viewContext)
-        _ = try persistenceController.jsonDecoder.decode(RepositoryResponse.self, from: data)
+        let viewContext = await persistenceController.container.viewContext
+        try await persistenceController.clean(viewContext)
+        _ = try await persistenceController.jsonDecoder.decode(RepositoryResponse.self, from: data)
         try viewContext.save()
     }
 }

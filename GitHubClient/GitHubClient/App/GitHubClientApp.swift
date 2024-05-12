@@ -5,16 +5,31 @@
 //  Created by fox on 20/04/2024.
 //
 
+import CoreData
 import SwiftUI
 
 @main
 struct GitHubClientApp: App {
-    let persistenceController = PersistenceController.shared
+    var persistenceController: PersistenceController {
+        PersistenceController.shared
+    }
+    var viewContext: NSManagedObjectContext {
+        container.viewContext
+    }
+    var container: NSPersistentContainer {
+        persistenceController.container
+    }
+    var networkController: NetworkController {
+        NetworkController(persistenceController: persistenceController)
+    }
 
     var body: some Scene {
         WindowGroup {
-            GitHubContentView(networkController: NetworkController(persistenceController: persistenceController))
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            GitHubContentView(networkController: networkController)
+                .environment(\.managedObjectContext, viewContext)
+                .task {
+                    print("hi")
+                }
         }
     }
 }
